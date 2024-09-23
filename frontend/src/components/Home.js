@@ -1,0 +1,330 @@
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import person from "../assets/person.jpeg";
+import pizza from "../assets/pizza.png";
+import pizza2 from "../assets/pizza2.png";
+import pizza3 from "../assets/pizza3.png";
+import pizza4 from "../assets/pizza4.png";
+import { RiSearch2Line } from "react-icons/ri";
+import { PiBatteryChargingVerticalFill } from "react-icons/pi";
+import { useState } from "react";
+import logo from "../assets/logo.png";
+import {
+	FaFacebookF,
+	FaLinkedin,
+	FaTwitter,
+	FaYoutube,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+function Home() {
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const pizzas = [
+		{
+			image: pizza4,
+		},
+		{
+			image: pizza3,
+		},
+		{
+			image: pizza2,
+		},
+	];
+	const popularPizza = [
+		{
+			name: "Margherita",
+			price: "150",
+			description: "Tomato, Mozzarella, Bell Peppers, Onions, Olives",
+			image: pizza3,
+			person: person,
+		},
+		{
+			name: "Pepperoni",
+			price: "160",
+			description: "Pepperoni, Mozzarella, Tomato Sauce",
+			image: pizza3,
+			person: person,
+		},
+		{
+			name: "BBQ Chicken",
+			price: "170",
+			description: "BBQ Sauce, Chicken, Mozzarella, Onions",
+			image: pizza4,
+			person: person,
+		},
+		{
+			name: "Hawaiian",
+			price: "155",
+			description: "Ham, Pineapple, Mozzarella, Tomato Sauce",
+			image: pizza4,
+			person: person,
+		},
+		{
+			name: "Veggie",
+			price: "145",
+			description: "Bell Peppers, Onions, Mushrooms, Olives, Mozzarella",
+			image: pizza3,
+			person: person,
+		},
+		{
+			name: "Four Cheese",
+			price: "180",
+			description: "Mozzarella, Parmesan, Gorgonzola, Ricotta",
+			image: pizza4,
+			person: person,
+		},
+	];
+	return (
+		<div className='home'>
+			<div className='home-container-one'>
+				<div className='left-side'>
+					<h1>Order us</h1>
+					<p>
+						In publishing and graphic design, Lorem ipsum is a placeholder text
+						commonly used to demonstrate the visual form of a document or a
+						typeface without relying on meaningful content.
+					</p>
+					<div className='search-bar'>
+						<input className='input-field' type='text' placeholder='Search ' />
+						<button className='search-icon'>
+							<RiSearch2Line style={{ color: "white", fontSize: "37px" }} />
+						</button>
+					</div>
+				</div>
+				<div className='right-side'>
+					<img src={pizza} alt='Pizza' />
+				</div>
+			</div>
+			<div className='home-container-two'>
+				<h1> Featured pizza</h1>
+				<Carousel
+					autoPlay
+					interval={3000}
+					infiniteLoop
+					showIndicators={true}
+					showStatus={false}
+					showThumbs={false}
+					showArrows={false}
+					renderIndicator={(onClickHandler, isSelected, index) => (
+						<li
+							className={`indicator ${isSelected ? "active" : ""}`}
+							onClick={onClickHandler}
+							key={index}
+						/>
+					)}
+				>
+					{pizzas.map((item, index) => {
+						const cardColors = ["#2F2F2F", "#50482B", "#296D60"];
+						const cardColor = cardColors[index % cardColors.length];
+
+						return (
+							<div className='card' style={{ backgroundColor: cardColor }}>
+								<div className='card-content'>
+									<h2>
+										Make Your First Order
+										<br />
+										and Get <span style={{ color: "#FF8507" }}>50% Off</span>
+									</h2>
+									<p>
+										In publishing and graphic design, Lorem ipsum is a
+										placeholder text commonly used to demonstrate the visual
+										form of a document or a typeface without.
+									</p>
+									<button className='order-button'>
+										{" "}
+										<Link
+											to='/signup'
+											style={{ textDecoration: "none", color: "white" }}
+										>
+											Order Now
+										</Link>
+									</button>
+								</div>
+								<div className='card-image'>
+									<img src={item.image} alt='Promo 1' />
+								</div>
+							</div>
+						);
+					})}
+				</Carousel>
+			</div>
+			<div className='home-container-three'>
+				<h1> Top Restaurants</h1>
+				<div className='cards-two'>
+					{pizzas.map((item, index) => (
+						<div className='slide'>
+							<div className='one'>
+								<div style={{ display: "flex" }}>
+									<img
+										src={person}
+										style={{
+											width: "70px",
+											height: "70px",
+											borderRadius: "50%",
+										}}
+									/>
+									<h4 style={{ marginLeft: "10px", fontSize: "20px" }}>
+										Azmera Pizza
+									</h4>
+								</div>
+								<p style={{ textAlign: "start" }}>
+									In publishing and graphic design, Lorem ipsum is a placeholder
+									text commonly used to...
+								</p>
+							</div>
+							<div className='two'>
+								<PiBatteryChargingVerticalFill
+									style={{
+										color: "#ff8507",
+										backgroundColor: "#fed1a3",
+										padding: "8px",
+										fontSize: "80px",
+										marginRight: "30px",
+										borderRadius: "50%",
+									}}
+								/>
+								<div
+									style={{
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "start",
+									}}
+								>
+									<p style={{ margin: "0", color: "grey" }}> Number of order</p>
+									<h2
+										style={{ margin: "0", fontSize: "50px", color: "#ff8507" }}
+									>
+										2k
+									</h2>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className='home-container-four'>
+				<h1> Popular Pizzas</h1>
+				<div className='grid-container'>
+					{popularPizza.map((pizza, index) => (
+						<div className='card' key={index}>
+							<img src={pizza.image} alt={pizza.name} className='pizza-image' />
+							<div className='card-content'>
+								<h3 style={{ margin: "0", fontSize: "30px" }}>{pizza.name}</h3>
+								<p style={{ margin: "0" }}>{pizza.description}</p>
+								<div className='price-order'>
+									<span className='price'>
+										<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+											{pizza.price}
+										</h2>
+										Birr
+									</span>
+									<button className='order-button'>
+										<Link
+											to='/signup'
+											style={{ textDecoration: "none", color: "white" }}
+										>
+											Order
+										</Link>
+									</button>
+								</div>
+								<div className='footer'>
+									<img
+										src={pizza.person}
+										alt='Person'
+										className='person-image'
+									/>
+									<span style={{ fontSize: "30px" }}>Azmera Pizza</span>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+			<div className='home-container-five'>
+				<h1> Fasting</h1>
+				<div className='grid-container'>
+					{popularPizza.map((pizza, index) => (
+						<div className='card' key={index}>
+							<img src={pizza.image} alt={pizza.name} className='pizza-image' />
+							<div className='card-content'>
+								<h3 style={{ margin: "0", fontSize: "30px" }}>{pizza.name}</h3>
+								<p style={{ margin: "0" }}>{pizza.description}</p>
+								<div className='price-order'>
+									<span className='price'>
+										<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+											{pizza.price}
+										</h2>
+										Birr
+									</span>
+									<button className='order-button'>
+										<Link
+											to='/signup'
+											style={{ textDecoration: "none", color: "white" }}
+										>
+											Order
+										</Link>
+									</button>
+								</div>
+								<div className='footer'>
+									<img
+										src={pizza.person}
+										alt='Person'
+										className='person-image'
+									/>
+									<span style={{ fontSize: "30px" }}>Azmera Pizza</span>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+			<footer class='footer'>
+				<div class='footer-top'>
+					<nav class='footer-nav'>
+						<a href='#'>Home</a>
+						<a href='#'>Order</a>
+						<a href='#'>About Us</a>
+					</nav>
+
+					<div class='feedback'>
+						<div class='footer-logo'>
+							<img src={logo} alt='Pizza Logo' class='logo-image' />
+							<span>Pizza</span>
+						</div>
+						<div class='feedback-container'>
+							<input
+								type='text'
+								placeholder='Your feedback...'
+								class='feedback-input'
+							/>
+							<button class='feedback-button'>✈️</button>
+						</div>
+					</div>
+				</div>
+				<div class='footer-bottom'>
+					<div style={{ paddingLeft: "20px" }}>
+						<span>@2024 Pizza All Rights Reserved.</span>
+						<a href='#'>Terms & Conditions</a>
+					</div>
+
+					<div class='social-icons'>
+						<a href='#'>
+							<FaFacebookF />
+						</a>
+						<a href='#'>
+							<FaLinkedin />
+						</a>
+						<a href='#'>
+							<FaTwitter />
+						</a>
+						<a href='#'>
+							<FaYoutube />
+						</a>
+					</div>
+				</div>
+			</footer>
+		</div>
+	);
+}
+
+export default Home;
