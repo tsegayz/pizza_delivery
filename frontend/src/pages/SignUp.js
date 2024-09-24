@@ -12,7 +12,7 @@ function SignUp() {
 		termsAccepted: false,
 	});
 
-  const navigate = useNavigate(); 
+	const navigate = useNavigate();
 	const handleChange = (e) => {
 		const { name, value, type, checked } = e.target;
 		setForm({
@@ -31,9 +31,14 @@ function SignUp() {
 				<img src={logo} />
 			</div>
 			<div className='right-side'>
-				<div style={{display:'flex'}}>
+				<div style={{ display: "flex" }}>
 					<img src={logo} />
-					<h3 style={{color:'#ff7200', fontSize:'30px', paddingLeft:'10px'}}> Pizza</h3>
+					<h3
+						style={{ color: "#ff7200", fontSize: "30px", paddingLeft: "10px" }}
+					>
+						{" "}
+						Pizza
+					</h3>
 				</div>
 				<form onSubmit={handleSubmit}>
 					<div className='input-container'>

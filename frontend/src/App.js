@@ -1,17 +1,15 @@
-{
-	(" ");
-}
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Home from "./components/Home";
-import About from "./components/About";
-import NavBar from "./components/NavBar";
-import Order from "./components/Order";
-import OrderHistory from "./components/OrderHistory";
-import SignIn from "./components/SignIn";
-import SignUp from "./components/SignUp";
-import Dashboard from "./components/Dashboard";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import NavBar from "./pages/NavBar";
+import Order from "./pages/Order";
+import OrderHistory from "./pages/OrderHistory";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Dashboard from "./pages/DashboardOrders";
+import AddMenu from "./pages/AddMenu";
 
 function App() {
 	return (
@@ -32,6 +30,7 @@ function App() {
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/order' element={<Order />} />
+						<Route path='/addMenu' element={<AddMenu />} />
 						<Route
 							path='/orderHis'
 							element={
