@@ -1,10 +1,5 @@
 import { useState } from "react";
-import {
-	FaBell,
-	FaDownload,
-	FaEye,
-	FaUserCircle,
-} from "react-icons/fa";
+import { FaBell, FaDownload, FaEye, FaUserCircle } from "react-icons/fa";
 import Modal from "react-modal";
 import Sidebar from "../components/Sidebar";
 import pizza3 from "../assets/pizza3.png";
@@ -78,13 +73,13 @@ function Dashboard() {
 	const [selectedOrderId, setSelectedOrderId] = useState(null);
 
 	const showDetail = (orderId) => {
-		setSelectedOrderId(orderId); // Set the clicked order ID
-		setShowModal(true); // Open the modal
+		setSelectedOrderId(orderId);
+		setShowModal(true);
 	};
 
 	const closeModal = () => {
-		setShowModal(false); // Close the modal
-		setSelectedOrderId(null); // Clear selected order ID
+		setShowModal(false);
+		setSelectedOrderId(null);
 	};
 
 	const updateStatus = (index, newStatus) => {

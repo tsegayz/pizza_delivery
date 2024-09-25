@@ -10,6 +10,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/DashboardOrders";
 import AddMenu from "./pages/AddMenu";
+import Role from "./pages/Role";
+import User from "./pages/User";
 
 function App() {
 	return (
@@ -30,6 +32,8 @@ function App() {
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/order' element={<Order />} />
+						<Route path='/role' element={<Role/>} />
+						<Route path='/user' element={<User/>} />
 						<Route path='/addMenu' element={<AddMenu />} />
 						<Route
 							path='/orderHis'

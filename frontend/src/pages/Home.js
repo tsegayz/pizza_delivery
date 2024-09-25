@@ -131,7 +131,6 @@ function Home() {
 										form of a document or a typeface without.
 									</p>
 									<button className='order-button'>
-										{" "}
 										<Link
 											to='/signup'
 											style={{ textDecoration: "none", color: "white" }}

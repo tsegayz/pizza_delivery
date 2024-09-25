@@ -1,7 +1,7 @@
 .sidebar-container {
     height: 100vh; 
     width: 220px;  
-    background-color: #f8f9fa; 
+    background-color: white; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,7 +21,7 @@
     text-decoration: none;
     color: #333;
     font-size: 1.1rem;
-    padding: 5px 15px;
+    padding: 0px 15px;
     padding-left: 30px;
     display: flex;
     align-items: center;
@@ -34,11 +34,13 @@
   .sidebar-container li a span {
     margin-right: 15px;
   }
-  
-  .sidebar-container li a:hover, .sidebar-container li a.selected {
+  .sidebar-container li a:hover {
+    background-color: #ffedd9;
+  }
+  .sidebar-container li a.selected {
     background-color: #FFCD99;
     color: #ff9a34;
-    font-size: 18px;
+    font-size: 17px;
     font-family: Arial, Helvetica, sans-serif;
   }
   
