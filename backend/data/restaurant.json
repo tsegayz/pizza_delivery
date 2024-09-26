@@ -1,0 +1,182 @@
+[
+	{
+		"_id": 1,
+		"name": "Kategna Ethiopian Restaurant",
+		"pizza_id": 2,
+		"description": "A cozy restaurant that serves traditional Ethiopian dishes and has outdoor seating.",
+		"latitude": 9.0169,
+		"longitude": 38.7608,
+		"image": "/images/restaurants/Kategna.jpg"
+	},
+	{
+		"_id": 2,
+		"name": "Dire Dawa Delights",
+		"pizza_id": 19,
+		"description": "Discover the unique flavors of Dire Dawa with a diverse menu featuring local specialties.",
+		"latitude": 9.595,
+		"longitude": 41.8647,
+		"image": "/images/restaurants/Dire-Dawa-Delights.jpg"
+	},
+	{
+		"_id": 3,
+		"name": "Lucy Ethiopian Restaurant",
+		"pizza_id": 4,
+		"description": "An authentic Ethiopian restaurant offering a variety of traditional dishes.",
+		"latitude": 9.0102,
+		"longitude": 38.7617,
+		"image": "/images/restaurants/lucy.jpg"
+	},
+	{
+		"_id": 4,
+		"name": "Shaheen Restaurant",
+		"pizza_id": 7,
+		"description": "A spice-focused restaurant offering a wide range of aromatic Ethiopian dishes.",
+		"latitude": 9.0109,
+		"longitude": 38.7846,
+		"image": "/images/restaurants/Shaheen.jpg"
+	},
+	{
+		"_id": 5,
+		"name": "Dashen Traditional Restaurant",
+		"pizza_id": 8,
+		"description": "A traditional Ethiopian restaurant with cultural performances and communal dining.",
+		"latitude": 9.0278,
+		"longitude": 38.7325,
+		"image": "/images/restaurants/dashen.jpg"
+	},
+	{
+		"_id": 6,
+		"name": "Totot Traditional Restaurant",
+		"pizza_id": 11,
+		"description": "A traditional restaurant showcasing the rich flavors and cultural heritage of Ethiopia.",
+		"latitude": 9.0081,
+		"longitude": 38.764,
+		"image": "/images/restaurants/totot.jpg"
+	},
+	{
+		"_id": 7,
+		"name": "Yod Abyssinia Cultural Restaurant",
+		"pizza_id": 1,
+		"description": "A cultural restaurant that serves Ethiopian cuisine and has live music performances.",
+		"latitude": 9.0238,
+		"longitude": 38.7612,
+		"image": "/images/restaurants/yod-abyssinia.jpg"
+	},
+	{
+		"_id": 8,
+		"name": "Taitu Ethiopian Restaurant",
+		"pizza_id": 12,
+		"description": "One of the oldest Ethiopian restaurants, serving authentic dishes in a historic setting.",
+		"latitude": 9.022,
+		"longitude": 38.7526,
+		"image": "/images/restaurants/Taitu.jpg"
+	},
+	{
+		"_id": 9,
+		"name": "Ras Ethiopian Restaurant",
+		"pizza_id": 13,
+		"description": "An Ethiopian restaurant known for its flavorful meat and vegetarian dishes.",
+		"latitude": 9.0156,
+		"longitude": 38.7646,
+		"image": "/images/restaurants/Ras.jpeg"
+	},
+	{
+		"_id": 10,
+		"name": "Ethio Delight Restaurant",
+		"pizza_id": 14,
+		"description": "A delightful Ethiopian restaurant offering a range of traditional and modern dishes.",
+		"latitude": 9.0058,
+		"longitude": 38.7423,
+		"image": "/images/restaurants/Ethio-Delight.jpg"
+	},
+	{
+		"_id": 11,
+		"name": "Taste of Lalibela",
+		"pizza_id": 15,
+		"description": "Experience the culinary delights of Lalibela with a blend of traditional and modern Ethiopian dishes.",
+		"latitude": 12.0333,
+		"longitude": 39.0333,
+		"image": "/images/restaurants/Taste-of-Lalibela.jpg"
+	},
+	{
+		"_id": 12,
+		"name": "Harar Coffee House",
+		"pizza_id": 16,
+		"description": "Sip on the famous Harari coffee while enjoying the cozy ambiance of this traditional coffee house.",
+		"latitude": 9.3133,
+		"longitude": 42.1315,
+		"image": "/images/restaurants/Harar-Coffee-House.jpg"
+	},
+	{
+		"_id": 13,
+		"name": "Addis Ababa Bistro",
+		"pizza_id": 17,
+		"description": "A trendy bistro in the heart of Addis Ababa, serving a fusion of Ethiopian and international cuisines.",
+		"latitude": 9.0244,
+		"longitude": 38.7457,
+		"image": "/images/restaurants/Addis-Ababa-Bistro.jpg"
+	},
+	{
+		"_id": 14,
+		"name": "Hawassa Fish Market",
+		"pizza_id": 18,
+		"description": "Indulge in fresh seafood dishes sourced from Lake Hawassa at this bustling fish market restaurant.",
+		"latitude": 7.0558,
+		"longitude": 38.4867,
+		"image": "/images/restaurants/Hawassa-Fish-Market.jpg"
+	},
+	{
+		"_id": 15,
+		"name": "2000 Habesha Cultural Restaurant",
+		"pizza_id": 3,
+		"description": "A cultural restaurant that serves Ethiopian and Eritrean cuisine and has traditional seating.",
+		"latitude": 9.0084,
+		"longitude": 38.7693,
+		"image": "/images/restaurants/2000-Habesha.png"
+	},
+	{
+		"_id": 16,
+		"name": "Axumite Cuisine",
+		"pizza_id": 20,
+		"description": "Immerse yourself in the culinary traditions of Axum with a menu inspired by ancient Ethiopian recipes.",
+		"latitude": 14.126,
+		"longitude": 38.7243,
+		"image": "/images/restaurants/Axumite-Cuisine.jpg"
+	},
+	{
+		"_id": 17,
+		"name": "Gonder Grill",
+		"pizza_id": 21,
+		"description": "Grill your own meat to perfection in the historical city of Gonder at this lively grill restaurant.",
+		"latitude": 12.6033,
+		"longitude": 37.4671,
+		"image": "/images/restaurants/Gonder-Grill.jpg"
+	},
+	{
+		"_id": 18,
+		"name": "Awash Riverside Restaurant",
+		"pizza_id": 22,
+		"description": "Relish delicious Ethiopian cuisine while enjoying the serene views of the Awash River.",
+		"latitude": 8.9862,
+		"longitude": 40.1479,
+		"image": "/images/restaurants/Awash-Riverside.jpg"
+	},
+	{
+		"_id": 19,
+		"name": "Semien Mountain Lodge restaurant",
+		"pizza_id": 23,
+		"description": "Dine amidst the stunning landscapes of the Simien Mountains at this mountain lodge restaurant.",
+		"latitude": 13.1244,
+		"longitude": 38.2027,
+		"image": "/images/restaurants/Semien-Mountain.jpg"
+	},
+	{
+		"_id": 20,
+		"name": "Bahir Dar Brasserie",
+		"pizza_id": 24,
+		"description": "Enjoy a fusion of Ethiopian and French cuisines at this elegant brasserie in Bahir Dar.",
+		"latitude": 11.6013,
+		"longitude": 37.3887,
+		"image": "/images/restaurants/Bahir-Dar-Brasserie.jpg"
+	}
+]

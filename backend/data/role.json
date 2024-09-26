@@ -1,0 +1,17 @@
+[
+	{
+		"_id": 1,
+		"name": "Admin",
+		"description": "Full access to all system functionality"
+	},
+	{
+		"_id": 2,
+		"name": "User",
+		"description": "Can create and modify pizza order"
+	},
+	{
+		"_id": 3,
+		"name": "Sub Admin",
+		"description": "Can manage restaurant and customers"
+	}
+]

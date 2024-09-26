@@ -1,0 +1,47 @@
+[
+	{
+		"_id": 1,
+		"name": "View Dashboard",
+		"description": "Allows users to view the website dashboard."
+	},
+	{
+		"_id": 2,
+		"name": "Manage Orders",
+		"description": "Allows users to manage pizza orders"
+	},
+	{
+		"_id": 12,
+		"name": "View Customers",
+		"description": "Allows administrators to view a list of customers who have booked tours."
+	},
+	{
+		"_id": 13,
+		"name": "Edit Customers",
+		"description": "Allows administrators to edit customer information and booking details."
+	},
+	{
+		"_id": 14,
+		"name": "Delete Customers",
+		"description": "Allows administrators to delete customer records from the website."
+	},
+	{
+		"_id": 16,
+		"name": "View restaurants",
+		"description": "Allows users to view information about restaurants on the website."
+	},
+	{
+		"_id": 17,
+		"name": "Create restaurants",
+		"description": "Allows administrators to create new restaurant listings on the website."
+	},
+	{
+		"_id": 18,
+		"name": "Edit restaurants",
+		"description": "Allows administrators to edit information about existing restaurants on the website."
+	},
+	{
+		"_id": 19,
+		"name": "Delete restaurants",
+		"description": "Allows administrators to delete restaurant listings from the website."
+	}
+]

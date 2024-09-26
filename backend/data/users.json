@@ -1,0 +1,13 @@
+[
+	{
+		"_id": 1,
+		"name": "Tsega Yaekob",
+		"email": "admin@pizza.io",
+		"active": true,
+		"phoneNumber": "+251-997-657-897",
+		"password": "13579xyz",
+		"passwordConfirm": "13579xyz",
+		"role_id": 1,
+		"permission_id": 1
+	}
+]
