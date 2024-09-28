@@ -8,11 +8,6 @@ const userSchema = new mongoose.Schema(
     _id: {
       type: Number,
     },
-    name: {
-      type: String,
-      required: [true, "Please provide your name"],
-      trim: true,
-    },
     password: {
       type: String,
       required: [true, "Please provide a password"],
@@ -50,8 +45,9 @@ const userSchema = new mongoose.Schema(
     permission_id: {
       type: Number,
       default: 2,
-      required: [true, "Please provide a role_id"],
+      required: [true, "Please provide a permission_id"],
     },
+    location: String
   },
   { _id: false, autoCreate: false }
 );

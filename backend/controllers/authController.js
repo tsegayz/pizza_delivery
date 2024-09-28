@@ -12,13 +12,23 @@ const signinToken = (id) => {
 // Sign Up User
 exports.signup = async (req, res, next) => {
 	try {
+		// Validate password confirmation
+		if (req.body.password !== req.body.passwordConfirm) {
+			return res.status(400).json({
+				status: "fail",
+				message: "Passwords do not match",
+			});
+		}
+
 		const newUser = await User.create({
 			_id: req.body._id,
-			name: req.body.name,
 			email: req.body.email,
 			password: req.body.password,
 			passwordConfirm: req.body.passwordConfirm,
-			role_id: req.body.role_id,
+			role_id: req.body.role_id || 2,
+			permission_id: req.body.permission_id || 2,
+			location: req.body.location,
+			phoneNumber: req.body.phoneNumber,
 		});
 
 		// Automatically log in the user
@@ -32,13 +42,18 @@ exports.signup = async (req, res, next) => {
 				user: newUser,
 			},
 		});
-		// No need to call next() after sending the response
 	} catch (err) {
+		if (err.name === "MongoError" && err.code === 11000) {
+			return res.status(400).json({
+				status: "fail",
+				message: "Email already exists",
+			});
+		}
+		console.error("Signup Error:", err);
 		res.status(400).json({
 			status: "fail",
 			message: err.message || "Signup failed",
 		});
-		// Optionally pass the error to the error handling middleware
 		next(err);
 	}
 };
@@ -85,7 +100,10 @@ exports.protect = async (req, res, next) => {
 	let token;
 
 	// 1) Get the token from the Authorization header
-	if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+	if (
+		req.headers.authorization &&
+		req.headers.authorization.startsWith("Bearer")
+	) {
 		token = req.headers.authorization.split(" ")[1];
 	}
 
@@ -108,8 +126,6 @@ exports.protect = async (req, res, next) => {
 			message: "The user belonging to this token no longer exists",
 		});
 	}
-
-	
 };
 
 exports.restrictTo = (...roles) => {

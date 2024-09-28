@@ -125,13 +125,11 @@ function Order() {
 							<span style={{ color: "grey", fontSize: "14px" }}>Birr</span>{" "}
 						</h2>
 					</div>
-					
-					<Link to='/dashboard'>
+
 					<button className='order-button' onClick={handleOrder}>
 						Order
 						<GoArrowUpRight />
 					</button>
-					</Link>
 				</div>
 			</div>
 			<div className='ordered-page'>
