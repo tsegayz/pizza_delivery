@@ -12,50 +12,78 @@ function SignUp() {
 		phoneNumber: "",
 		termsAccepted: false,
 	});
- 
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
+	const [location, setLocation] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [termsAccepted, setTermsAccepted] = useState(false);
+
+	const [showModal, setShowModal] = useState(false);
+	const [responseMessage, setResponseMessage] = useState("");
 	const navigate = useNavigate();
-	const handleChange = (e) => {
-		const { name, value, type, checked } = e.target;
-		setForm({
-			...form,
-			[name]: type === "checkbox" ? checked : value,
-		});
-	};
+
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		navigate("/order");
-		// if (!name || !email || !password || !passwordConfirm) {
-		// 	setResponseMessage("Please fill in all the fields");
-		// 	return;
-		// }
-		// // Check if passwords match
-		// if (password !== passwordConfirm) {
-		// 	setResponseMessage("Password and confirm password do not match!");
-		// 	return;
-		// }
+		setResponseMessage(""); // Reset response message
 	
-		// try {
-		// 	const response = await axios.post(
-		// 		"http://localhost:5000/api/v1/users/signup",
-		// 		{
-		// 			name,
-		// 			email,
-		// 			password,
-		// 			passwordConfirm,
-		// 		}
-		// 	);
+		if (
+			!email ||
+			!password ||
+			!passwordConfirm ||
+			!location ||
+			!phoneNumber ||
+			!termsAccepted
+		) {
+			setResponseMessage("Please fill in all the fields");
+			return;
+		}
 	
-		// 	const userData = response.data.data.user;
-		// 	const token = response.data.token; // Extract the JWT token from the response
-		// 	localStorage.setItem("token", token); // Store the token in local storage
-		// 	localStorage.setItem("user", JSON.stringify(userData));
+		// Check if passwords match
+		if (password !== passwordConfirm) {
+			setResponseMessage("Password and confirm password do not match!");
+			return;
+		}
 	
-		// 	setResponseMessage(response.data.status);
-		// 	setShowModal(true);
-		// } catch (error) {
-		// }
+		try {
+			const response = await axios.post(
+				"http://localhost:5000/api/v1/users/signup",
+				{
+					email,
+					password,
+					passwordConfirm,
+					location,
+					phoneNumber,
+					termsAccepted,
+				}
+			);
+	
+			const userData = response.data.data.user;
+			const token = response.data.token; // Extract the JWT token from the response
+			localStorage.setItem("token", token); // Store the token in local storage
+			localStorage.setItem("user", JSON.stringify(userData));
+	
+			setResponseMessage(response.data.status);
+			navigate("/order"); // Navigate after successful signup
+			console.log({
+				email,
+				password,
+				passwordConfirm,
+				location,
+				phoneNumber,
+				termsAccepted,
+			});
+		} catch (error) {
+			if (error.response) {
+				// Handle specific error responses
+				setResponseMessage(error.response.data.message || "An error occurred");
+			} else {
+				setResponseMessage("An error occurred");
+			}
+		}
 	};
+	
 	return (
 		<div className='sign'>
 			<div className='left-side'>
@@ -67,7 +95,6 @@ function SignUp() {
 					<h3
 						style={{ color: "#ff7200", fontSize: "30px", paddingLeft: "10px" }}
 					>
-						{" "}
 						Pizza
 					</h3>
 				</div>
@@ -76,8 +103,11 @@ function SignUp() {
 						<input
 							type='email'
 							name='email'
-							value={form.email}
-							onChange={handleChange}
+							value={email}
+							onChange={(e) => {
+								setEmail(e.target.value);
+								setResponseMessage(""); 
+							}}
 							placeholder=' '
 						/>
 						<label>Email address</label>
@@ -87,8 +117,11 @@ function SignUp() {
 						<input
 							type='password'
 							name='password'
-							value={form.password}
-							onChange={handleChange}
+							value={password}
+							onChange={(e) => {
+								setPassword(e.target.value);
+								setResponseMessage(""); 
+							}}
 							placeholder=' '
 						/>
 						<label>Password</label>
@@ -98,8 +131,11 @@ function SignUp() {
 						<input
 							type='password'
 							name='confirmPassword'
-							value={form.confirmPassword}
-							onChange={handleChange}
+							value={passwordConfirm}
+							onChange={(e) => {
+								setPasswordConfirm(e.target.value);
+								setResponseMessage(""); 
+							}}
 							placeholder=' '
 						/>
 						<label>Confirm Password</label>
@@ -109,19 +145,24 @@ function SignUp() {
 						<input
 							type='text'
 							name='location'
-							value={form.location}
-							onChange={handleChange}
+							value={location}
+							onChange={(e) => {
+								setLocation(e.target.value);
+								setResponseMessage(""); 
+							}}
 							placeholder=' '
 						/>
 						<label>Location</label>
 					</div>
-
 					<div className='input-container'>
 						<input
 							type='text'
 							name='phoneNumber'
-							value={form.phoneNumber}
-							onChange={handleChange}
+							value={phoneNumber}
+							onChange={(e) => {
+								setPhoneNumber(e.target.value);
+								setResponseMessage("");
+							}}
 							placeholder=' '
 						/>
 						<label>Phone Number</label>
@@ -131,8 +172,11 @@ function SignUp() {
 						<input
 							type='checkbox'
 							name='termsAccepted'
-							checked={form.termsAccepted}
-							onChange={handleChange}
+							checked={termsAccepted}
+							onChange={(e) => {
+								setTermsAccepted(e.target.value);
+								setResponseMessage(""); 
+							}}
 						/>
 						<label>I accept the Terms and Conditions</label>
 					</div>
