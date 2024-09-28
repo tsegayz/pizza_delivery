@@ -3,160 +3,170 @@
 		"_id": 1,
 		"name": "Special pizza",
 		"price": 5.99,
+		"rating": 4,
 		"restaurant_id": 1,
-		"image": "/images/meals/Bozena-shiro.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 2,
 		"name": "Margarita",
 		"price": 9.99,
+		"rating": 4,
 		"restaurant_id": 2,
-		"image": "/images/meals/kitfo.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 3,
 		"name": "Margarita",
 		"price": 8.99,
+		"rating": 4,
 		"restaurant_id": 3,
-		"image": "/images/meals/Doro-Wat.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers,Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 4,
 		"name": "Chicken pizza",
 		"price": 10.99,
+		"rating": 4,
 		"restaurant_id": 4,
-		"image": "/images/meals/Tibs.jpg",
+		"image": "/images/pizzas/pizza3.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers,Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 5,
 		"name": "Margarita",
 		"price": 7.99,
+		"rating": 6 ,
 		"restaurant_id": 5,
-		"image": "/images/meals/Shiro.jpg",
+		"image": "/images/pizzas/pizza3.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers,Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 6,
 		"name": "Margarita",
 		"price": 6.99,
+		"rating": 6 ,
 		"restaurant_id": 6,
-		"image": "/images/meals/Gomen.jpg",
+		"image": "/images/pizzas/pizza3.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers,Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 7,
 		"name": "Chicken pizza",
 		"price": 8.99,
+		"rating": 6 ,
 		"restaurant_id": 7,
-		"image": "/images/meals/Zigni.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers,Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 8,
 		"name": "Chicken pizza",
 		"price": 7.99,
+		"rating": 6 ,
 		"restaurant_id": 8,
-		"image": "/images/meals/Key-Wot.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 9,
 		"name": "Chicken pizza",
 		"price": 11.99,
+		"rating": 6 ,
 		"restaurant_id": 9,
-		"image": "/images/meals/Afar-style-tibs.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 10,
 		"name": "Chicken pizza",
 		"price": 3.99,
+		"rating": 6 ,
 		"restaurant_id": 10,
-		"image": "/images/meals/Kurkufa-bread.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 11,
 		"name": "Margarita",
 		"price": 5.99,
+		"rating": 6 ,
 		"restaurant_id": 11,
-		"image": "/images/meals/Shahan-ful.jpg",
+		"image": "/images/pizzas/pizza4.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 12,
 		"name": "Margarita",
 		"price": 4.99,
+		"rating": 6 ,
 		"restaurant_id": 12,
-		"image": "/images/meals/Café-touba.jpg",
+		"image": "/images/pizzas/pizza4.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 13,
 		"name": "Margarita",
 		"price": 12.99,
+		"rating": 6 ,
 		"restaurant_id": 13,
-		"image": "/images/meals/Danakil-style-goat-stew.jpg",
+		"image": "/images/pizzas/pizza4.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, pepeproni",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 14,
 		"name": "Margarita",
 		"price": 9.99,
+		"rating": 6 ,
 		"restaurant_id": 14,
-		"image": "/images/meals/Gomen-kitfo.jpg",
+		"image": "/images/pizzas/pizza4.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, pepeproni",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 15,
 		"name": "Margarita",
 		"price": 2.99,
+		"rating": 6 ,
 		"restaurant_id": 15,
-		"image": "/images/meals/Margarita.jpg",
+		"image": "/images/pizzas/pizza4.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, pepeproni",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 16,
 		"name": "Margarita",
 		"price": 1.99,
+		"rating": 6 ,
 		"restaurant_id": 16,
-		"image": "/images/meals/Margarita.jpg",
+		"image": "/images/pizzas/pizza2.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, pepeproni",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	},
 	{
 		"_id": 17,
 		"name": "Margarita",
 		"price": 3.99,
+		"rating": 6 ,
 		"restaurant_id": 17,
-		"image": "/images/meals/Margarita.jpg",
-		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
-	},
-	{
-		"_id": 18,
-		"name": "Margarita",
-		"price": 7.99,
-		"restaurant_id": 188,
-		"image": "/images/meals/Margarita.jpg",
-		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
-	},
-	{
-		"_id": 19,
-		"name": "Margarita",
-		"price": 10.99,
-		"restaurant_id": 19,
-		"image": "/images/meals/Margarita.jpeg",
-		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
-	},
-	{
-		"_id": 20,
-		"name": "Margarita",
-		"price": 4.99,
-		"restaurant_id": 20,
-		"image": "/images/meals/Margarita.jpeg",
+		"image": "/images/pizzas/pizza3.png",
+		"ingredient": "Tomato, Mozzarella, Bell Peppers, Onions, Olives",
 		"description": "Lorem dolor sit amet, consectetur adipiscing elit. Pellentesque velilit tempor "
 	}
 ]

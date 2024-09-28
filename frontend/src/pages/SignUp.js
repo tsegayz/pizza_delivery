@@ -1,4 +1,5 @@
 import logo from "../assets/logo.png";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
@@ -11,7 +12,7 @@ function SignUp() {
 		phoneNumber: "",
 		termsAccepted: false,
 	});
-
+ 
 	const navigate = useNavigate();
 	const handleChange = (e) => {
 		const { name, value, type, checked } = e.target;
@@ -21,9 +22,39 @@ function SignUp() {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		navigate("/order");
+		// if (!name || !email || !password || !passwordConfirm) {
+		// 	setResponseMessage("Please fill in all the fields");
+		// 	return;
+		// }
+		// // Check if passwords match
+		// if (password !== passwordConfirm) {
+		// 	setResponseMessage("Password and confirm password do not match!");
+		// 	return;
+		// }
+	
+		// try {
+		// 	const response = await axios.post(
+		// 		"http://localhost:5000/api/v1/users/signup",
+		// 		{
+		// 			name,
+		// 			email,
+		// 			password,
+		// 			passwordConfirm,
+		// 		}
+		// 	);
+	
+		// 	const userData = response.data.data.user;
+		// 	const token = response.data.token; // Extract the JWT token from the response
+		// 	localStorage.setItem("token", token); // Store the token in local storage
+		// 	localStorage.setItem("user", JSON.stringify(userData));
+	
+		// 	setResponseMessage(response.data.status);
+		// 	setShowModal(true);
+		// } catch (error) {
+		// }
 	};
 	return (
 		<div className='sign'>

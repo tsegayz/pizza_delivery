@@ -12,7 +12,9 @@ const pizzaSchema = new mongoose.Schema({
 		required: true,
 	},
 	image:String,
-	rating: Number
+	price:Number,
+	rating: Number,
+	ingredient:String,
 
 });
 

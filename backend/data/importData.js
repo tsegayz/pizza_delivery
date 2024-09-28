@@ -1,7 +1,7 @@
 const fs = require("fs");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const Order = require("./../models/permissionModel");
+const Order = require("./../models/restaurantModel");
 
 dotenv.config({ path: `${__dirname}/../config.env` });
 
@@ -18,7 +18,7 @@ mongoose
   .catch(err => console.error("DB connection error:", err));
 
 const orders = JSON.parse(
-  fs.readFileSync(`${__dirname}/permission.json`, "utf-8")
+  fs.readFileSync(`${__dirname}/restaurant.json`, "utf-8")
 );
 
 // Import data

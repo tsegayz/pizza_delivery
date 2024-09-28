@@ -38,7 +38,16 @@ const userSchema = new mongoose.Schema(
     },
     passwordChangedAt: Date,
     active: Boolean,
+    phoneNumber:{
+      type: String,
+      required: [true, "Please provide a phone number"],
+    },
     role_id: {
+      type: Number,
+      default: 2,
+      required: [true, "Please provide a role_id"],
+    },
+    permission_id: {
       type: Number,
       default: 2,
       required: [true, "Please provide a role_id"],

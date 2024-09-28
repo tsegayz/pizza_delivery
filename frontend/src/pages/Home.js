@@ -5,20 +5,19 @@ import pizza from "../assets/pizza.png";
 import pizza2 from "../assets/pizza2.png";
 import pizza3 from "../assets/pizza3.png";
 import pizza4 from "../assets/pizza4.png";
+import { useLocation, useHistory } from "react-router-dom";
+
 import { RiSearch2Line } from "react-icons/ri";
 import { PiBatteryChargingVerticalFill } from "react-icons/pi";
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import {
-	FaFacebookF,
-	FaLinkedin,
-	FaTwitter,
-	FaYoutube,
-} from "react-icons/fa";
+import { FaFacebookF, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function Home() {
+function Home({ data, restaurants }) {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const popularPizzas = data.filter((item) => item.rating > 4.5);
+
 	const pizzas = [
 		{
 			image: pizza4,
@@ -150,25 +149,26 @@ function Home() {
 			<div className='home-container-three'>
 				<h1> Top Restaurants</h1>
 				<div className='cards-two'>
-					{pizzas.map((item, index) => (
+					{restaurants.map((item, index) => (
 						<div className='slide'>
 							<div className='one'>
 								<div style={{ display: "flex" }}>
 									<img
-										src={person}
+										src={item.image}
 										style={{
 											width: "70px",
 											height: "70px",
 											borderRadius: "50%",
 										}}
 									/>
-									<h4 style={{ marginLeft: "10px", fontSize: "20px" }}>
-										Azmera Pizza
+									<h4
+										style={{ marginTop: "15px", fontSize: "20px", margin: 0 }}
+									>
+										{item.name}
 									</h4>
 								</div>
-								<p style={{ textAlign: "start" }}>
-									In publishing and graphic design, Lorem ipsum is a placeholder
-									text commonly used to...
+								<p style={{ textAlign: "start", fontSize: "14px" }}>
+									{item.description}...
 								</p>
 							</div>
 							<div className='two'>
@@ -193,7 +193,7 @@ function Home() {
 									<h2
 										style={{ margin: "0", fontSize: "50px", color: "#ff8507" }}
 									>
-										2k
+										{item.noOfOrder}
 									</h2>
 								</div>
 							</div>
@@ -204,77 +204,113 @@ function Home() {
 			<div className='home-container-four'>
 				<h1> Popular Pizzas</h1>
 				<div className='grid-container'>
-					{popularPizza.map((pizza, index) => (
-						<div className='card' key={index}>
-							<img src={pizza.image} alt={pizza.name} className='pizza-image' />
-							<div className='card-content'>
-								<h3 style={{ margin: "0", fontSize: "30px" }}>{pizza.name}</h3>
-								<p style={{ margin: "0" }}>{pizza.description}</p>
-								<div className='price-order'>
-									<span className='price'>
-										<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
-											{pizza.price}
-										</h2>
-										Birr
-									</span>
-									<button className='order-button'>
-										<Link
-											to='/signup'
-											style={{ textDecoration: "none", color: "white" }}
-										>
-											Order
-										</Link>
-									</button>
-								</div>
-								<div className='footer'>
-									<img
-										src={pizza.person}
-										alt='Person'
-										className='person-image'
-									/>
-									<span style={{ fontSize: "30px" }}>Azmera Pizza</span>
+					{popularPizzas.slice(0, 6).map((pizza, index) => {
+						const restaurant = restaurants.find(
+							(r) => r._id === pizza.restaurant_id
+						);
+
+						return (
+							<div className='card' key={index}>
+								<img
+									src={pizza.image}
+									alt={pizza.name}
+									className='pizza-image'
+									style={{ margin: "30px 0" }}
+								/>
+								<div className='card-content'>
+									<h3 style={{ margin: "0", fontSize: "30px" }}>
+										{pizza.name}
+									</h3>
+									<p style={{ margin: "0" }}>{pizza.description}</p>
+									<div className='price-order'>
+										<span className='price'>
+											<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+												{pizza.price}
+											</h2>
+											Birr
+										</span>
+										<button className='order-button'>
+											<Link
+												to='/signup'
+												style={{ textDecoration: "none", color: "white" }}
+											>
+												Order
+											</Link>
+										</button>
+									</div>
+									<div className='footer'>
+										{restaurant && (
+											<>
+												<img
+													src={restaurant.image}
+													alt={restaurant.name}
+													className='person-image'
+												/>
+												<span style={{ fontSize: "20px" }}>
+													{restaurant.name}
+												</span>
+											</>
+										)}
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</div>
 			<div className='home-container-five'>
 				<h1> Fasting</h1>
 				<div className='grid-container'>
-					{popularPizza.map((pizza, index) => (
-						<div className='card' key={index}>
-							<img src={pizza.image} alt={pizza.name} className='pizza-image' />
-							<div className='card-content'>
-								<h3 style={{ margin: "0", fontSize: "30px" }}>{pizza.name}</h3>
-								<p style={{ margin: "0" }}>{pizza.description}</p>
-								<div className='price-order'>
-									<span className='price'>
-										<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
-											{pizza.price}
-										</h2>
-										Birr
-									</span>
-									<button className='order-button'>
-										<Link
-											to='/signup'
-											style={{ textDecoration: "none", color: "white" }}
-										>
-											Order
-										</Link>
-									</button>
-								</div>
-								<div className='footer'>
-									<img
-										src={pizza.person}
-										alt='Person'
-										className='person-image'
-									/>
-									<span style={{ fontSize: "30px" }}>Azmera Pizza</span>
+					{data.map((pizza, index) => {
+						const restaurant = restaurants.find(
+							(r) => r._id === pizza.restaurant_id
+						);
+						return (
+							<div className='card' key={index}>
+								<img
+									src={pizza.image}
+									alt={pizza.name}
+									className='pizza-image'
+								/>
+								<div className='card-content'>
+									<h3 style={{ margin: "0", fontSize: "30px" }}>
+										{pizza.name}
+									</h3>
+									<p style={{ margin: "0", fontSize:"18px" }}>{pizza.ingredient}</p>
+									<div className='price-order'>
+										<span className='price'>
+											<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+												{pizza.price}
+											</h2>
+											Birr
+										</span>
+										<button className='order-button'>
+											<Link
+												to='/signup'
+												style={{ textDecoration: "none", color: "white" }}
+											>
+												Order
+											</Link>
+										</button>
+									</div>
+									<div className='footer'>
+										{restaurant && (
+											<>
+												<img
+													src={restaurant.image}
+													alt={restaurant.name}
+													className='person-image'
+												/>
+												<span style={{ fontSize: "20px" }}>
+													{restaurant.name}
+												</span>
+											</>
+										)}
+									</div>
 								</div>
 							</div>
-						</div>
-					))}
+						);
+					})}
 				</div>
 			</div>
 			<footer class='footer'>

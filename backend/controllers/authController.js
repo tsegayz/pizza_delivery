@@ -1,13 +1,15 @@
 const User = require("./../models/userModel");
 const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
-//// create new user
 
+//// Create a new token
 const signinToken = (id) => {
 	return jwt.sign({ id }, process.env.JWT_SECRET, {
 		expiresIn: process.env.JWT_EXPIRES_IN,
 	});
 };
+
+// Sign Up User
 exports.signup = async (req, res, next) => {
 	try {
 		const newUser = await User.create({
@@ -19,9 +21,10 @@ exports.signup = async (req, res, next) => {
 			role_id: req.body.role_id,
 		});
 
-		// automatically logging in when the user opens the page by sending the token to the user
+		// Automatically log in the user
 		const token = signinToken(newUser._id);
-		console.log(`toke${token}`);
+		console.log(`Token: ${token}`);
+
 		res.status(201).json({
 			status: "success",
 			token,
@@ -29,107 +32,84 @@ exports.signup = async (req, res, next) => {
 				user: newUser,
 			},
 		});
-
-		next(); // Move the next() function call here
+		// No need to call next() after sending the response
 	} catch (err) {
-		res.status(404).json({
-			data: {
-				status: "fail",
-				message: err,
-			},
+		res.status(400).json({
+			status: "fail",
+			message: err.message || "Signup failed",
 		});
-		next(err); // Pass the error to the next middleware or error handler
+		// Optionally pass the error to the error handling middleware
+		next(err);
 	}
 };
 
-/// logging in user
-
+// Logging in user
 exports.login = async (req, res, next) => {
 	const { email, password } = req.body;
 
-	// first check if the email and password exist in the db
+	// Ensure email and password are provided
 	if (!email || !password) {
 		return res.status(400).json({
-			data: {
-				status: "please provide a valid email and password",
-			},
+			status: "fail",
+			message: "Please provide a valid email and password",
 		});
 	}
 
-	// check if the user exists and the password is correct
+	// Find user by email and include password in the query
 	const user = await User.findOne({ email }).select("+password");
 
-	// checking if the user password is the correct one using the function in the model
+	// Check if user exists and password is correct
 	if (!user || !(await user.correctPassword(password, user.password))) {
 		return res.status(401).json({
-			data: {
-				status: "incorrect email or password",
-			},
+			status: "fail",
+			message: "Incorrect email or password",
 		});
 	}
 
-	// if correct then send the token to user
+	// Generate token and send it to the user
 	const token = signinToken(user._id);
 	res.status(200).json({
-		status: "sucess",
+		status: "success",
 		user: {
 			_id: user._id,
 			name: user.name,
 			email: user.email,
-			role_id: user.role_id, // Include the role_id in the response
+			role_id: user.role_id,
 		},
 		token,
 	});
 };
 
-// a middleware to protect the resources that are accessed by users
-// if all the conditions below are satisfied then the user gets access to resources
+// Middleware to protect resources
 exports.protect = async (req, res, next) => {
-	// 1) getting token and chech if it's there
 	let token;
 
-	if (
-		req.headers.authorization &&
-		req.headers.authorization.startsWith("Bearer")
-	) {
+	// 1) Get the token from the Authorization header
+	if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
 		token = req.headers.authorization.split(" ")[1];
 	}
 
-	console.log(token);
-
+	// 2) Ensure token exists
 	if (!token) {
 		return res.status(401).json({
 			status: "fail",
-			message: "you are not logged in! please log in to get access",
+			message: "You are not logged in! Please log in to get access",
 		});
 	}
 
-	// 2) verify token - if the token data is manipulated and if it has expired
+	// 3) Verify token
 	const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-	// 3) check if the user still exists
+	// 4) Check if user exists
 	const currentUser = await User.findById(decoded.id);
-	console.log(currentUser);
 	if (!currentUser) {
 		return res.status(401).json({
-			data: {
-				status: "fail",
-				message: "the user belonging to this token no longer exist",
-			},
+			status: "fail",
+			message: "The user belonging to this token no longer exists",
 		});
 	}
 
-	// 4) check if the user changed password after the token was issued
-	if (currentUser.changedPasswordAfter(decoded.iat)) {
-		return res.status(401).json({
-			data: {
-				status: "fail",
-				message: "user recently changed password",
-			},
-		});
-	}
-	req.user = currentUser;
-	next();
+	
 };
 
 exports.restrictTo = (...roles) => {

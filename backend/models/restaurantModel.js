@@ -7,10 +7,14 @@ const restaurantSchema = new mongoose.Schema({
 		required: [true, "a role must have a name"],
 	},
 	description: String,
-	noOfOrder_id: {
+	noOfOrder: {
+		type: Number,
+	},
+	pizza_id: {
 		type: Number,
 	},
 	image: String,
+	ingredient: String,
 });
 
 // THE MODEL

@@ -39,7 +39,7 @@ exports.getPizza = async (req, res) => {
 		const pizza = await Pizza.findById(req.params.id);
 		res.status(200).json({
 			status: "success",
-			data: pizza,
+			data: [pizza],
 		});
 	} catch (err) {
 		res.status(404).json({

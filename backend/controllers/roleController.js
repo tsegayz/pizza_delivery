@@ -3,6 +3,7 @@ const APIFeatures = require("./../utils/apiFeatures");
 
 // HANDLER FUNCTIONS
 // getting all Roles
+// getting all Roles
 exports.getAllRole = async (req, res) => {
 	try {
 		const features = new APIFeatures(Role.find(), req.query)
@@ -10,10 +11,8 @@ exports.getAllRole = async (req, res) => {
 			.sort()
 			.limitFields()
 			.pagination();
-		// EXECUTING QUERY
 		const roles = await features.query;
 
-		// SENDING RESPONSE
 		res.status(200).json({
 			status: "success",
 			responseTime: req.requestTime,
@@ -23,11 +22,9 @@ exports.getAllRole = async (req, res) => {
 			},
 		});
 	} catch (err) {
-		res.status(404).json({
-			data: {
-				status: "fail",
-				message: err,
-			},
+		res.status(500).json({
+			status: "fail",
+			message: err.message,
 		});
 	}
 };
@@ -35,19 +32,24 @@ exports.getAllRole = async (req, res) => {
 // a single Role using parameters in our case is id
 exports.getRole = async (req, res) => {
 	try {
-		const role = await Role.findById(req.params.id);
+		const role = await Role.findOne({ _id: req.params.id });
+		if (!role) {
+			return res.status(404).json({
+				status: "fail",
+				message: "Role not found",
+			});
+		}
 		res.status(200).json({
 			status: "success",
 			data: role,
 		});
 	} catch (err) {
-		res.status(404).json({
+		res.status(500).json({
 			status: "fail",
-			message: " invalide id",
+			message: "Invalid ID",
 		});
 	}
 };
-
 //// create new Role
 exports.createRole = async (req, res) => {
 	try {

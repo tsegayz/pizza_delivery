@@ -12,7 +12,6 @@ mongoose.connect(DB, {
 }).catch((err) => {
     console.error('DB connection error:', err);
 });
-
 const app = require("./app");
 
 const port = process.env.PORT || 5000;
