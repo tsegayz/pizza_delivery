@@ -123,7 +123,26 @@ body {
 	width: 70%;
 	margin-top: 2em;
 }
-
+.home-container-one .search-results {
+	background-color: #fff;
+	margin-top: 10px;
+	margin-left: 10em;
+	padding-top: 12px;
+	height: 6em;
+	width:30em;
+	z-index: 3;
+}
+.home-container-one .search-bar input::placeholder {
+	font-size: 20px;
+}
+.home-container-one .search-item {
+	height: 40px;
+	padding-top: 5px;
+	font-size: 21px;
+	font-weight: 100;
+	padding-bottom: 7px;
+	width: 100%;
+}
 .input-field {
 	flex: 1;
 	padding: 20px 25px;
@@ -445,6 +464,7 @@ body {
 	flex: 0 0 auto;
 	width: 7%;
 }
+
 footer {
 	background-color: #d1b894;
 	color: #fff;

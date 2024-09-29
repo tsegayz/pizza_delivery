@@ -15,8 +15,8 @@ import { FaFacebookF, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Home({ data, restaurants }) {
-	const [currentSlide, setCurrentSlide] = useState(0);
 	const popularPizzas = data.filter((item) => item.rating > 4.5);
+	const [filteredPizzas, setfilteredPizzas] = useState([]);
 
 	const pizzas = [
 		{
@@ -29,50 +29,19 @@ function Home({ data, restaurants }) {
 			image: pizza2,
 		},
 	];
-	const popularPizza = [
-		{
-			name: "Margherita",
-			price: "150",
-			description: "Tomato, Mozzarella, Bell Peppers, Onions, Olives",
-			image: pizza3,
-			person: person,
-		},
-		{
-			name: "Pepperoni",
-			price: "160",
-			description: "Pepperoni, Mozzarella, Tomato Sauce",
-			image: pizza3,
-			person: person,
-		},
-		{
-			name: "BBQ Chicken",
-			price: "170",
-			description: "BBQ Sauce, Chicken, Mozzarella, Onions",
-			image: pizza4,
-			person: person,
-		},
-		{
-			name: "Hawaiian",
-			price: "155",
-			description: "Ham, Pineapple, Mozzarella, Tomato Sauce",
-			image: pizza4,
-			person: person,
-		},
-		{
-			name: "Veggie",
-			price: "145",
-			description: "Bell Peppers, Onions, Mushrooms, Olives, Mozzarella",
-			image: pizza3,
-			person: person,
-		},
-		{
-			name: "Four Cheese",
-			price: "180",
-			description: "Mozzarella, Parmesan, Gorgonzola, Ricotta",
-			image: pizza4,
-			person: person,
-		},
-	];
+	const filterHandler = (e) => {
+		const searchWord = e.target.value;
+		const newFilter = data.filter((value) => {
+			return value.name.toLowerCase().includes(searchWord.toLowerCase());
+		});
+
+		if (searchWord === "") {
+			setfilteredPizzas([]);
+		} else {
+			setfilteredPizzas(newFilter);
+		}
+	};
+
 	return (
 		<div className='home'>
 			<div className='home-container-one'>
@@ -84,10 +53,28 @@ function Home({ data, restaurants }) {
 						typeface without relying on meaningful content.
 					</p>
 					<div className='search-bar'>
-						<input className='input-field' type='text' placeholder='Search ' />
+						<input className='input-field' type='text' onChange={filterHandler}  placeholder='Search ' />
 						<button className='search-icon'>
 							<RiSearch2Line style={{ color: "white", fontSize: "37px" }} />
 						</button>
+					</div>
+					<div>
+						{filteredPizzas.length !== 0 && (
+							<div className='search-results'>
+								{filteredPizzas.map((value) => {
+									return (
+										<a
+											className='search-item'
+											target=''
+											key={value._id}
+											// onClick={() => handleClickPizza(value)} 
+										>
+											{value.name}
+										</a>
+									);
+								})}
+							</div>
+						)}
 					</div>
 				</div>
 				<div className='right-side'>
