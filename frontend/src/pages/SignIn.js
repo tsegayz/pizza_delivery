@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Remove useHistory
 import { useState } from "react";
 import axios from "axios";
 
-function SignIn() {
+function SignIn({ setIsAuthenticated }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
@@ -39,14 +39,23 @@ function SignIn() {
 
 			setResponseMessage(response.data.status);
 			if (userData.role_id === 1) {
-				navigate("/dashboard"); 
+				navigate("/dashboard");
 			} else {
 				setShowModal(true);
-				navigate("/order"); 
+				navigate("/order");
 			}
+
+			// After successful signup, navigate to the order page based on selected item
+			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
+			if (selectedItem) {
+				navigate(`/order/${selectedItem._id}`);
+			} else {
+				navigate("/");
+			}
+
+			setIsAuthenticated(true);
 		} catch (error) {
 			if (error.response && error.response.status === 401) {
-				// Unauthorized: Incorrect username or password
 				setError("Incorrect username or password!");
 			} else {
 				setError("An error occurred");
@@ -57,12 +66,16 @@ function SignIn() {
 	return (
 		<div className='sign'>
 			<div className='left-side'>
-				<img src={logo} alt="Logo" />
+				<img src={logo} alt='Logo' />
 			</div>
 			<div className='right-side'>
 				<div style={{ display: "flex" }}>
-					<img src={logo} alt="Logo" />
-					<h3 style={{ color: "#ff7200", fontSize: "30px", paddingLeft: "10px" }}>Pizza</h3>
+					<img src={logo} alt='Logo' />
+					<h3
+						style={{ color: "#ff7200", fontSize: "30px", paddingLeft: "10px" }}
+					>
+						Pizza
+					</h3>
 				</div>
 				<form onSubmit={handleSubmit}>
 					<div className='input-container'>
@@ -72,7 +85,7 @@ function SignIn() {
 							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
-								setError(""); 
+								setError("");
 							}}
 							placeholder=' '
 						/>
@@ -86,7 +99,7 @@ function SignIn() {
 							value={password}
 							onChange={(e) => {
 								setPassword(e.target.value);
-								setError(""); 
+								setError("");
 							}}
 							placeholder=' '
 						/>
@@ -100,7 +113,7 @@ function SignIn() {
 							checked={remember}
 							onChange={(e) => {
 								setRemember(e.target.checked);
-								setError(""); 
+								setError("");
 							}}
 						/>
 						<label>Remember me</label>

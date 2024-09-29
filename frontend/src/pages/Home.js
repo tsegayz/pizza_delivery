@@ -1,11 +1,9 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import person from "../assets/person.jpeg";
 import pizza from "../assets/pizza.png";
 import pizza2 from "../assets/pizza2.png";
 import pizza3 from "../assets/pizza3.png";
 import pizza4 from "../assets/pizza4.png";
-import { useLocation, useHistory } from "react-router-dom";
 
 import { RiSearch2Line } from "react-icons/ri";
 import { PiBatteryChargingVerticalFill } from "react-icons/pi";
@@ -13,11 +11,19 @@ import { useState } from "react";
 import logo from "../assets/logo.png";
 import { FaFacebookF, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Home({ data, restaurants }) {
 	const popularPizzas = data.filter((item) => item.rating > 4.5);
 	const [filteredPizzas, setfilteredPizzas] = useState([]);
+	const [selectedItem, setSelectedItem] = useState(null);
+	const navigate = useNavigate();
 
+	const handleOrderClick = (item) => {
+		setSelectedItem(item);
+		localStorage.setItem("selectedItem", JSON.stringify(item));
+		navigate("/signup");
+	};
 	const pizzas = [
 		{
 			image: pizza4,
@@ -53,7 +59,12 @@ function Home({ data, restaurants }) {
 						typeface without relying on meaningful content.
 					</p>
 					<div className='search-bar'>
-						<input className='input-field' type='text' onChange={filterHandler}  placeholder='Search ' />
+						<input
+							className='input-field'
+							type='text'
+							onChange={filterHandler}
+							placeholder='Search '
+						/>
 						<button className='search-icon'>
 							<RiSearch2Line style={{ color: "white", fontSize: "37px" }} />
 						</button>
@@ -67,7 +78,7 @@ function Home({ data, restaurants }) {
 											className='search-item'
 											target=''
 											key={value._id}
-											// onClick={() => handleClickPizza(value)} 
+											// onClick={() => handleClickPizza(value)}
 										>
 											{value.name}
 										</a>
@@ -216,13 +227,11 @@ function Home({ data, restaurants }) {
 											</h2>
 											Birr
 										</span>
-										<button className='order-button'>
-											<Link
-												to='/signup'
-												style={{ textDecoration: "none", color: "white" }}
-											>
-												Order
-											</Link>
+										<button
+											className='order-button'
+											onClick={() => handleOrderClick(pizza)}
+										>
+											Order
 										</button>
 									</div>
 									<div className='footer'>
@@ -263,7 +272,9 @@ function Home({ data, restaurants }) {
 									<h3 style={{ margin: "0", fontSize: "30px" }}>
 										{pizza.name}
 									</h3>
-									<p style={{ margin: "0", fontSize:"18px" }}>{pizza.ingredient}</p>
+									<p style={{ margin: "0", fontSize: "18px" }}>
+										{pizza.ingredient}
+									</p>
 									<div className='price-order'>
 										<span className='price'>
 											<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
@@ -271,13 +282,11 @@ function Home({ data, restaurants }) {
 											</h2>
 											Birr
 										</span>
-										<button className='order-button'>
-											<Link
-												to='/signup'
-												style={{ textDecoration: "none", color: "white" }}
-											>
-												Order
-											</Link>
+										<button
+											className='order-button'
+											onClick={() => handleOrderClick(pizza)}
+										>
+											Order
 										</button>
 									</div>
 									<div className='footer'>

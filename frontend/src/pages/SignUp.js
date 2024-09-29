@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-function SignUp() {
+function SignUp({ setIsAuthenticated }) {
 	const [form, setForm] = useState({
 		email: "",
 		password: "",
@@ -22,7 +22,6 @@ function SignUp() {
 	const [showModal, setShowModal] = useState(false);
 	const [responseMessage, setResponseMessage] = useState("");
 	const navigate = useNavigate();
-
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -65,15 +64,16 @@ function SignUp() {
 			localStorage.setItem("user", JSON.stringify(userData));
 	
 			setResponseMessage(response.data.status);
-			navigate("/order"); // Navigate after successful signup
-			console.log({
-				email,
-				password,
-				passwordConfirm,
-				location,
-				phoneNumber,
-				termsAccepted,
-			});
+	
+			// After successful signup, navigate to the order page based on selected item
+			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
+			if (selectedItem) {
+				navigate(`/order/${selectedItem._id}`);
+			} else {
+				navigate("/"); // Fallback navigation if no selected item
+			}
+	
+			setIsAuthenticated(true);
 		} catch (error) {
 			if (error.response) {
 				// Handle specific error responses
@@ -84,6 +84,7 @@ function SignUp() {
 		}
 	};
 	
+
 	return (
 		<div className='sign'>
 			<div className='left-side'>
@@ -106,7 +107,7 @@ function SignUp() {
 							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
-								setResponseMessage(""); 
+								setResponseMessage("");
 							}}
 							placeholder=' '
 						/>
@@ -120,7 +121,7 @@ function SignUp() {
 							value={password}
 							onChange={(e) => {
 								setPassword(e.target.value);
-								setResponseMessage(""); 
+								setResponseMessage("");
 							}}
 							placeholder=' '
 						/>
@@ -134,7 +135,7 @@ function SignUp() {
 							value={passwordConfirm}
 							onChange={(e) => {
 								setPasswordConfirm(e.target.value);
-								setResponseMessage(""); 
+								setResponseMessage("");
 							}}
 							placeholder=' '
 						/>
@@ -148,7 +149,7 @@ function SignUp() {
 							value={location}
 							onChange={(e) => {
 								setLocation(e.target.value);
-								setResponseMessage(""); 
+								setResponseMessage("");
 							}}
 							placeholder=' '
 						/>
@@ -175,7 +176,7 @@ function SignUp() {
 							checked={termsAccepted}
 							onChange={(e) => {
 								setTermsAccepted(e.target.value);
-								setResponseMessage(""); 
+								setResponseMessage("");
 							}}
 						/>
 						<label>I accept the Terms and Conditions</label>

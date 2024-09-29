@@ -30,7 +30,6 @@ function App() {
 			const { restaurants } = response2.data.data;
 			setRestaurant(restaurants);
 
-			console.log(pizzas);
 		} catch (error) {
 			console.error("Error fetching location types:", error);
 		}
@@ -56,7 +55,7 @@ function App() {
 						<Route path='/signin' element={<SignIn />} />
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
-						<Route path='/order' element={<Order />} />
+						<Route path='/order/:itemId' element={<Order />} />
 						<Route path='/role' element={<Role />} />
 						<Route path='/user' element={<User />} />
 						<Route path='/addMenu' element={<AddMenu />} />

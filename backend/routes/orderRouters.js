@@ -1,7 +1,6 @@
 const express = require("express");
 const orderController = require("../controllers/orderController");
-const authController = require('../controllers/authController')
-
+const authController = require("../controllers/authController");
 
 // ////// TOURS router
 const router = express.Router();
@@ -9,12 +8,16 @@ const router = express.Router();
 // CHAINING different middlewares
 router
 	.route("/")
-	.get(orderController.getAllOrder)
-	.post(authController.protect,  orderController.createOrder);
+	.get(
+		authController.protect,
+		authController.restrictTo(1),
+		orderController.getAllOrder
+	)
+	.post(orderController.createOrder);
 router
 	.route("/:id")
 	.get(orderController.getOrder)
-	.patch(authController.protect,  orderController.updateOrder)
-	.delete(authController.protect, orderController.deleteOrder);
+	.patch(orderController.updateOrder)
+	.delete(orderController.deleteOrder);
 
 module.exports = router;

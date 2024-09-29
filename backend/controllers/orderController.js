@@ -34,8 +34,16 @@ exports.getAllOrder = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
-	try {
-        const newOrder = await Order.create(req.body);
+    try {
+        const { user_id, toppings, quantity, price } = req.body; // Include user_id
+
+        const newOrder = await Order.create({
+            user_id, 
+            toppings, 
+            quantity,
+            price,
+        });
+
         res.status(201).json({
             status: 'success',
             data: newOrder,
@@ -46,7 +54,6 @@ exports.createOrder = async (req, res) => {
             message: err.message,
         });
     }
-
 };
     
 exports.getOrder = async (req, res) => {

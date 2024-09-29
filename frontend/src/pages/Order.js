@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-modal";
 import pizza3 from "../assets/pizza3.png";
 import pizza4 from "../assets/pizza4.png";
 import { GoArrowUpRight } from "react-icons/go";
 import { FaCheckCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 function Order() {
 	const popularPizza = [
@@ -39,10 +40,14 @@ function Order() {
 			image: pizza4,
 		},
 	];
-	const [mainPizza, setMainPizza] = useState(pizza3);
+	const [responseMessage, setResponseMessage] = useState("");
 	const [animate, setAnimate] = useState(false);
 	const [quantity, setQuantity] = useState(1);
 	const [showModal, setShowModal] = useState(false);
+	const [pizzaName, setPizzaName] = useState("");
+	const [toppings, setToppings] = useState([]);
+	const [price, setPrice] = useState(150); // Base price for a pizza
+
 	const [ingredients, setIngredients] = useState({
 		mozzarella: true,
 		tomato: true,
@@ -59,19 +64,85 @@ function Order() {
 	const increaseQuantity = () => setQuantity(quantity + 1);
 	const decreaseQuantity = () => setQuantity(quantity > 1 ? quantity - 1 : 1);
 
-	const handleOrder = () => {
-		console.log("Order placed", { quantity, ingredients });
+	const handleOrder = async (e) => {
+		e.preventDefault();
+
+		// Create an array of selected toppings based on ingredients state
+		const selectedToppings = Object.keys(ingredients).filter(
+			(ingredient) => ingredients[ingredient]
+		);
+
+		try {
+			const storedUser = localStorage.getItem("user");
+			const user = storedUser ? JSON.parse(storedUser) : null; // Retrieve user object from local storage
+			const user_id = user ? user._id : null; // Get the user ID
+
+			if (!user_id) {
+				throw new Error("User ID is missing. Please log in.");
+			}
+
+			const token = localStorage.getItem("token"); // Retrieve the token from local storage
+
+			const axiosConfig = {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			};
+
+			const response = await axios.post(
+				"http://localhost:5000/api/v1/orders",
+				{
+					user_id: user_id,
+					pizzaName: pizzaName || "Margherita",
+					toppings: selectedToppings,
+					quantity: quantity,
+					price: price * quantity,
+				},
+				axiosConfig
+			);
+
+			// console.log("Response:", response.data);
+			setResponseMessage(response.data);
+		} catch (error) {
+			if (error.response) {
+				console.error("Error Response:", error.response.data);
+				setResponseMessage(error.response.data.message || "An error occurred");
+			} else {
+				console.error("Error:", error);
+				setResponseMessage("An error occurred");
+			}
+		}
 		setShowModal(true);
 	};
+
 	const closeModal = () => {
 		setShowModal(false);
 	};
+
+	const location = useLocation();
+	const [selectedItem, setSelectedItem] = useState(
+		location.state?.selectedItem || null
+	);
+	const [mainPizza, setMainPizza] = useState(null);
+
+	useEffect(() => {
+		console.log("Selected Item:", selectedItem);
+		if (!selectedItem) {
+			const item = JSON.parse(localStorage.getItem("selectedItem"));
+			if (item) {
+				setSelectedItem(item);
+				setMainPizza(item.image);
+			}
+		} else {
+			setMainPizza(selectedItem.image);
+		}
+	}, [selectedItem]);
+
+	if (!selectedItem) {
+		return <div>No item selected. Please go back to the home page.</div>;
+	}
 	const selectPizza = (pizza) => {
-		setAnimate(true);
-		setTimeout(() => {
-			setMainPizza(pizza);
-			setAnimate(false);
-		}, 600);
+		setMainPizza(pizza);
 	};
 	return (
 		<div className='personal-order'>
@@ -121,7 +192,7 @@ function Order() {
 						</span>
 						<button onClick={increaseQuantity}>+</button>
 						<h2 className='price'>
-							{quantity * 150}{" "}
+							{quantity * price}{" "}
 							<span style={{ color: "grey", fontSize: "14px" }}>Birr</span>{" "}
 						</h2>
 					</div>

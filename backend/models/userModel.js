@@ -47,7 +47,7 @@ const userSchema = new mongoose.Schema(
       default: 2,
       required: [true, "Please provide a permission_id"],
     },
-    location: String
+    location: String,
   },
   { _id: false, autoCreate: false }
 );
