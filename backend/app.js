@@ -24,6 +24,7 @@ const permissionRouter = require("./routes/permissionRouters");
 const restaurantRouter = require("./routes/restaurantsRouters");
 const roleRouter = require("./routes/roleRouters");
 const orderRouter = require("./routes/orderRouters");
+const menuRouter = require("./routes/menuRouters");
 
 // we used it as a middleware to attach it to the main route which is also called mounting
 app.use("/api/v1/users", userRouter);
@@ -32,6 +33,7 @@ app.use("/api/v1/permissions", permissionRouter);
 app.use("/api/v1/restaurants", restaurantRouter);
 app.use("/api/v1/roles", roleRouter);
 app.use("/api/v1/orders", orderRouter);
+app.use("/api/v1/menus", menuRouter);
 
 // read operation
 

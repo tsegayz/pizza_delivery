@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import pizza3 from "../assets/pizza3.png";
 import pizza4 from "../assets/pizza4.png";
 
-function OrderHistory() {
+function OrderHistory({data}) {
 	const popularPizza = [
 		{
 			name: "Margherita",

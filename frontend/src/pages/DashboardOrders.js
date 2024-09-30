@@ -67,7 +67,7 @@ const ordersData = [
 	},
 ];
 
-function Dashboard() {
+function Dashboard({data}) {
 	const [orders, setOrders] = useState(ordersData);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedOrderId, setSelectedOrderId] = useState(null);
@@ -150,7 +150,7 @@ function Dashboard() {
 							</tr>
 						</thead>
 						<tbody>
-							{orders.map((order, index) => (
+							{data.map((order, index) => (
 								<tr key={index}>
 									<td>
 										<img

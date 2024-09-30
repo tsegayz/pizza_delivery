@@ -18,6 +18,10 @@ import User from "./pages/User";
 function App() {
 	const [pizza, setPizza] = useState([]);
 	const [restaurant, setRestaurant] = useState([]);
+	const [order, setOrder] = useState([]);
+	const [user, setUser] = useState([]);
+	const [role, setRole] = useState([]);
+	
 
 	// Fetching data from the database
 	const fetchData = async () => {
@@ -29,6 +33,20 @@ function App() {
 			const response2 = await axios.get("/api/v1/restaurants");
 			const { restaurants } = response2.data.data;
 			setRestaurant(restaurants);
+
+			const response3 = await axios.get("/api/v1/orders");
+			const { orders } = response3.data.data;
+			setRestaurant(orders);
+
+			console.log(response3)
+
+			const response4 = await axios.get("/api/v1/users");
+			const { users } = response4.data.data;
+			setRestaurant(users);
+			
+			const response5 = await axios.get("/api/v1/role");
+			const { roles } = response5.data.data;
+			setRestaurant(roles);
 
 		} catch (error) {
 			console.error("Error fetching location types:", error);
@@ -56,19 +74,19 @@ function App() {
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/order/:itemId' element={<Order />} />
-						<Route path='/role' element={<Role />} />
-						<Route path='/user' element={<User />} />
+						<Route path='/role' element={<Role data={role}/>} />
+						<Route path='/user' element={<User data={user} />} />
 						<Route path='/addMenu' element={<AddMenu />} />
 						<Route
 							path='/orderHis'
 							element={
 								<>
 									<NavBar />
-									<OrderHistory />
+									<OrderHistory data={order} />
 								</>
 							}
 						/>
-						<Route path='/Dashboard' element={<Dashboard />} />
+						<Route path='/Dashboard' element={<Dashboard data={order} />} />
 					</Routes>
 				</div>
 			</Router>

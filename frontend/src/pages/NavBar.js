@@ -29,7 +29,7 @@ function NavBar() {
 				</ul>
 			</div>
 			<div className='register'>
-				<Link to='/signup'>Register</Link>
+				<Link to='/signin'>Register</Link>
 			</div>
 		</div>
 	);

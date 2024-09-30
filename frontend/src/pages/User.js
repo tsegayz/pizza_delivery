@@ -49,7 +49,7 @@ const userData = [
 	},
 ];
 
-function User() {
+function User({data}) {
 	const [users, setUsers] = useState(userData);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedUserId, setSelectedUserId] = useState(null);

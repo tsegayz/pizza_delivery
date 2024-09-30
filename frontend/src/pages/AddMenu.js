@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { FaUpload, FaPlus, FaBell, FaUserCircle } from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-function AddMenu() {
+function AddMenu({setIsAuthenticated}) {
 	const [form, setForm] = useState({ name: "", price: "" });
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [previewImage, setPreviewImage] = useState(null);
@@ -13,6 +15,8 @@ function AddMenu() {
 		onions: false,
 		olives: false,
 	});
+	const navigate = useNavigate();
+	const [responseMessage, setResponseMessage] = useState("");
 	const [newIngredient, setNewIngredient] = useState("");
 
 	const handleChange = (e) => {
@@ -41,9 +45,59 @@ function AddMenu() {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const [name, setName] = useState("");
+	const [topping, setTopping] = useState("");
+	const [price, setPrice] = useState("");
+	const [image, setImage] = useState("");
+		
+	
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log("Form data", form, ingredients);
+		setResponseMessage(""); 
+	
+		if (
+			!name ||
+			!topping ||
+			!price ||
+			!image 
+		) {
+			setResponseMessage("Please fill in all the fields");
+			return;
+		}
+	
+		try {
+			const response = await axios.post(
+				"http://localhost:5000/api/v1/addMenu",
+				{
+					name,
+					topping,
+					price,
+					image,
+				}
+			);
+	
+			const userData = response.data.data.user;
+			const token = response.data.token; 
+			localStorage.setItem("token", token); 
+			localStorage.setItem("user", JSON.stringify(userData));
+	
+			setResponseMessage(response.data.status);
+	
+			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
+			if (selectedItem) {
+				navigate(`/order/${selectedItem._id}`);
+			} else {
+				navigate("/");
+			}
+	
+			setIsAuthenticated(true);
+		} catch (error) {
+			if (error.response) {
+				setResponseMessage(error.response.data.message || "An error occurred");
+			} else {
+				setResponseMessage("An error occurred");
+			}
+		}
 	};
 
 	return (

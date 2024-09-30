@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Remove useHistory
 import { useState } from "react";
 import axios from "axios";
 
-function SignIn({ setIsAuthenticated }) {
+function SignIn() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
@@ -44,16 +44,6 @@ function SignIn({ setIsAuthenticated }) {
 				setShowModal(true);
 				navigate("/order");
 			}
-
-			// After successful signup, navigate to the order page based on selected item
-			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
-			if (selectedItem) {
-				navigate(`/order/${selectedItem._id}`);
-			} else {
-				navigate("/");
-			}
-
-			setIsAuthenticated(true);
 		} catch (error) {
 			if (error.response && error.response.status === 401) {
 				setError("Incorrect username or password!");

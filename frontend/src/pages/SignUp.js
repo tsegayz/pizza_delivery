@@ -19,7 +19,6 @@ function SignUp({ setIsAuthenticated }) {
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const [termsAccepted, setTermsAccepted] = useState(false);
 
-	const [showModal, setShowModal] = useState(false);
 	const [responseMessage, setResponseMessage] = useState("");
 	const navigate = useNavigate();
 

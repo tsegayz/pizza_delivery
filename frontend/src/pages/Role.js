@@ -25,7 +25,7 @@ const initialRoles = [
 	},
 ];
 
-function Role() {
+function Role({data}) {
 	const [roles, setRoles] = useState(initialRoles);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedRoleId, setSelectedRoleId] = useState(null);
