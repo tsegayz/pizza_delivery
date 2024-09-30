@@ -36,9 +36,21 @@ function Sidebar() {
 		},
 	];
 
+	const handleLogout = () => {
+		localStorage.removeItem("user");
+		window.location.href = "/";
+	};
 	return (
 		<div className={styles["sidebar-container"]}>
-			<h1 style={{ padding: "23px 84px", backgroundColor:'#f8f9fa', margin:"0" }}>Pizza</h1>
+			<h1
+				style={{
+					padding: "23px 84px",
+					backgroundColor: "#f8f9fa",
+					margin: "0",
+				}}
+			>
+				Pizza
+			</h1>
 			<span>
 				<img
 					src={logo}
@@ -63,23 +75,25 @@ function Sidebar() {
 					</li>
 				))}
 			</ul>
-			<Link
-				to='/signup'
+			<button
+				onClick={handleLogout}
 				style={{
+					backgroundColor:'transparent',
 					textDecoration: "none",
 					color: "red",
 					display: "flex",
 					alignItems: "center",
-          fontSize:'25px',
-          marginTop:'20px',
-          borderTop:'1px solid #d1d1d1',
-          padding:'20px 20px 0',
-          width:'80%'
+					fontSize: "25px",
+					marginTop: "20px",
+					border:"none",
+					borderTop: "0.1em solid #d1d1d1",
+					padding: "20px 20px 0",
+					width: "80%",
 				}}
 			>
 				<MdOutlineLogout />
 				Log Out
-			</Link>
+			</button>
 		</div>
 	);
 }

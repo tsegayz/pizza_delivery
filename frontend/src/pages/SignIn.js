@@ -2,8 +2,9 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom"; // Remove useHistory
 import { useState } from "react";
 import axios from "axios";
+import { setAuthorizationHeader } from '../axiosConfig'; 
 
-function SignIn() {
+function SignIn({setIsAuthenticated}) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
@@ -16,39 +17,33 @@ function SignIn() {
 		e.preventDefault();
 		setError("");
 		setResponseMessage("");
-
-		// Basic validation
+	
 		if (!email || !password) {
 			setError("Please fill in all the fields");
 			return;
 		}
-
+	
 		try {
-			const response = await axios.post(
-				"http://localhost:5000/api/v1/users/login",
-				{
-					email,
-					password,
-				}
-			);
-
+			const response = await axios.post("/api/v1/users/login", { email, password });
 			const userData = response.data.user;
-			const token = response.data.token; // Extract the JWT token from the response
-			localStorage.setItem("token", token); // Store the token in local storage
+			const token = response.data.token;
+			localStorage.setItem("token", token);
 			localStorage.setItem("user", JSON.stringify(userData));
 
-			setResponseMessage(response.data.status);
+			setAuthorizationHeader(); // Set authorization header
+			setIsAuthenticated(true); // Update authenticated state
+			
+			
 			if (userData.role_id === 1) {
 				navigate("/dashboard");
 			} else {
-				setShowModal(true);
 				navigate("/order");
 			}
 		} catch (error) {
-			if (error.response && error.response.status === 401) {
-				setError("Incorrect username or password!");
-			} else {
-				setError("An error occurred");
+			console.error("Error fetching data:", error);
+			if (error.response) {
+				console.error("Response data:", error.response.data);
+				console.error("Response status:", error.response.status);
 			}
 		}
 	};
@@ -109,7 +104,7 @@ function SignIn() {
 						<label>Remember me</label>
 					</div>
 
-					<button type='submit'>LOGIN</button>
+					<button type='submit' >LOGIN</button>
 
 					<div>
 						<p>

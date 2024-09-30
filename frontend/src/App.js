@@ -1,8 +1,6 @@
-import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { setAuthorizationHeader } from './axiosConfig'; 
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NavBar from "./pages/NavBar";
@@ -14,6 +12,7 @@ import Dashboard from "./pages/DashboardOrders";
 import AddMenu from "./pages/AddMenu";
 import Role from "./pages/Role";
 import User from "./pages/User";
+import axios from 'axios';
 
 function App() {
 	const [pizza, setPizza] = useState([]);
@@ -21,7 +20,7 @@ function App() {
 	const [order, setOrder] = useState([]);
 	const [user, setUser] = useState([]);
 	const [role, setRole] = useState([]);
-	
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	// Fetching data from the database
 	const fetchData = async () => {
@@ -36,26 +35,31 @@ function App() {
 
 			const response3 = await axios.get("/api/v1/orders");
 			const { orders } = response3.data.data;
-			setRestaurant(orders);
-
-			console.log(response3)
+			setOrder(orders);
 
 			const response4 = await axios.get("/api/v1/users");
 			const { users } = response4.data.data;
-			setRestaurant(users);
+			setUser(users);
 			
 			const response5 = await axios.get("/api/v1/role");
 			const { roles } = response5.data.data;
-			setRestaurant(roles);
+			setRole(roles);
 
 		} catch (error) {
-			console.error("Error fetching location types:", error);
+			console.error("Error fetching data:", error);
 		}
 	};
 
 	useEffect(() => {
-		fetchData();
+		setAuthorizationHeader(); 
+
+		const token = localStorage.getItem('token');
+		if (token) {
+			setIsAuthenticated(true); 
+			fetchData(); 
+		}
 	}, []);
+
 	return (
 		<div className='App'>
 			<Router>
@@ -70,7 +74,7 @@ function App() {
 								</>
 							}
 						/>
-						<Route path='/signin' element={<SignIn />} />
+						<Route path='/signin' element={<SignIn setIsAuthenticated={setIsAuthenticated}/>} />
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/order/:itemId' element={<Order />} />

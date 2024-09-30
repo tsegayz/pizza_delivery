@@ -4,10 +4,10 @@ import Sidebar from "../components/Sidebar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function AddMenu({setIsAuthenticated}) {
-	const [form, setForm] = useState({ name: "", price: "" });
+function AddMenu({ setIsAuthenticated }) {
 	const [selectedImage, setSelectedImage] = useState(null);
 	const [previewImage, setPreviewImage] = useState(null);
+
 	const [ingredients, setIngredients] = useState({
 		mozzarella: false,
 		tomato: false,
@@ -18,10 +18,6 @@ function AddMenu({setIsAuthenticated}) {
 	const navigate = useNavigate();
 	const [responseMessage, setResponseMessage] = useState("");
 	const [newIngredient, setNewIngredient] = useState("");
-
-	const handleChange = (e) => {
-		setForm({ ...form, [e.target.name]: e.target.value });
-	};
 
 	const handleCheckboxChange = (e) => {
 		setIngredients({ ...ingredients, [e.target.name]: e.target.checked });
@@ -46,51 +42,52 @@ function AddMenu({setIsAuthenticated}) {
 	};
 
 	const [name, setName] = useState("");
-	const [topping, setTopping] = useState("");
 	const [price, setPrice] = useState("");
-	const [image, setImage] = useState("");
-		
-	
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setResponseMessage(""); 
+		setResponseMessage("");
 	
-		if (
-			!name ||
-			!topping ||
-			!price ||
-			!image 
-		) {
+		// Convert selected ingredients to an array of strings
+		const selectedToppings = Object.keys(ingredients).filter(
+			(ingredient) => ingredients[ingredient]
+		);
+	
+		// Ensure all required fields are filled
+		if (!name || !price || !selectedImage) {
 			setResponseMessage("Please fill in all the fields");
 			return;
 		}
 	
+		// Create FormData object to handle image file
+		const formData = new FormData();
+		formData.append("name", name);
+		formData.append("price", price);
+		formData.append("toppings", JSON.stringify(selectedToppings));  // Convert array to string
+		formData.append("image", selectedImage); // Append the file directly
+		for (let pair of formData.entries()) {
+			console.log(pair[0], pair[1]);
+		}
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/addMenu",
+				"http://localhost:5000/api/v1/menus",
+				formData,
 				{
-					name,
-					topping,
-					price,
-					image,
+					headers: {
+						"Content-Type": "multipart/form-data",  // Important for sending file
+					}
 				}
 			);
 	
 			const userData = response.data.data.user;
-			const token = response.data.token; 
-			localStorage.setItem("token", token); 
+			const token = response.data.token;
+			localStorage.setItem("token", token);
 			localStorage.setItem("user", JSON.stringify(userData));
 	
 			setResponseMessage(response.data.status);
-	
-			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
-			if (selectedItem) {
-				navigate(`/order/${selectedItem._id}`);
-			} else {
-				navigate("/");
-			}
-	
 			setIsAuthenticated(true);
+			console.log(formData);
+	
 		} catch (error) {
 			if (error.response) {
 				setResponseMessage(error.response.data.message || "An error occurred");
@@ -99,6 +96,10 @@ function AddMenu({setIsAuthenticated}) {
 			}
 		}
 	};
+	
+	
+	
+	
 
 	return (
 		<div className='add-menu'>
@@ -133,8 +134,10 @@ function AddMenu({setIsAuthenticated}) {
 								type='text'
 								name='name'
 								id='name'
-								value={form.name}
-								onChange={handleChange}
+								value={name}
+								onChange={(e) => {
+									setName(e.target.value);
+								}}
 								placeholder=' '
 								required
 							/>
@@ -186,8 +189,10 @@ function AddMenu({setIsAuthenticated}) {
 							<input
 								type='number'
 								name='price'
-								value={form.price}
-								onChange={handleChange}
+								value={price}
+								onChange={(e) => {
+									setPrice(e.target.value);
+								}}
 								placeholder=' '
 								required
 							/>
@@ -196,23 +201,23 @@ function AddMenu({setIsAuthenticated}) {
 
 						<label htmlFor='file-upload' className='custom-file-upload'>
 							<FaUpload style={{ marginRight: "8px" }} />
-							{selectedImage? selectedImage.name: 'Upload pizza photo'}
+							{selectedImage ? selectedImage.name : "Upload pizza photo"}
 						</label>
 						<input
 							id='file-upload'
 							type='file'
 							accept='image/*'
 							onChange={handleImageChange}
-							style={{display:'none'}}
+							style={{ display: "none" }}
 						/>
 						<br />
 						{previewImage && (
-							<div style={{display:'flex'}}>
+							<div style={{ display: "flex" }}>
 								<h3>Image Preview:</h3>
 								<img
 									src={previewImage}
 									alt='Selected Preview'
-									style={{ width: "100px", height: "auto", marginLeft:'10px' }}
+									style={{ width: "100px", height: "auto", marginLeft: "10px" }}
 								/>
 							</div>
 						)}

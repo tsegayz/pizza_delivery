@@ -13,6 +13,6 @@ router
 		authController.restrictTo(1),
 		menuController.getAllMenu
 	)
-	.post(menuController.createMenu);
+	.post(menuController.uploadMenuImage, menuController.createMenu);
 
 module.exports = router;
