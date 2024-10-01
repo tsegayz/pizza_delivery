@@ -847,8 +847,14 @@ footer {
 	.home-container-three .cards-two .slide {
 		margin-left: 10px;
 	}
-	.orderhistory .home-container-four {
-		margin-top: 0;
+	.orderhistory {
+		margin-top: -7em;
+	}
+	.orderhistory .home-container-four .grid-container .card {
+		width: 90%;
+	}
+	.orderhistory .home-container-four .grid-container p {
+		font-size: 12px;
 	}
 }
 
