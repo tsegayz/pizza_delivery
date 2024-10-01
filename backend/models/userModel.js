@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Please provide a password"],
       minlength: 8,
       select: false,
     },
@@ -23,7 +22,6 @@ const userSchema = new mongoose.Schema(
     },
     passwordConfirm: {
       type: String,
-      required: [true, "Please provide matching password"],
       validate: {
         validator: function (el) {
           return el === this.password;
@@ -32,7 +30,10 @@ const userSchema = new mongoose.Schema(
       },
     },
     passwordChangedAt: Date,
-    active: Boolean,
+    status: {
+      type: String,
+      default: "Active"
+    },
     phoneNumber:{
       type: String,
       required: [true, "Please provide a phone number"],
@@ -101,6 +102,12 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 		return JWTTimestamp < passwordChangedAt;
 	}
 	return false;
+};
+userSchema.statics.createAdminUser = async function (userData) {
+  // Exclude password fields from the userData if they are not provided
+  const { password, passwordConfirm, ...rest } = userData;
+  const newUser = await this.create(rest); 
+  return newUser;
 };
 
 // THE MODEL

@@ -2,13 +2,12 @@ import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom"; // Remove useHistory
 import { useState } from "react";
 import axios from "axios";
-import { setAuthorizationHeader } from '../axiosConfig'; 
+import { setAuthorizationHeader } from "../axiosConfig";
 
-function SignIn({setIsAuthenticated}) {
+function SignIn({ setIsAuthenticated }) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [remember, setRemember] = useState(false);
-	const [showModal, setShowModal] = useState(false);
 	const [responseMessage, setResponseMessage] = useState("");
 	const [error, setError] = useState("");
 	const navigate = useNavigate(); // Use useNavigate for navigation
@@ -17,23 +16,25 @@ function SignIn({setIsAuthenticated}) {
 		e.preventDefault();
 		setError("");
 		setResponseMessage("");
-	
+
 		if (!email || !password) {
 			setError("Please fill in all the fields");
 			return;
 		}
-	
+
 		try {
-			const response = await axios.post("/api/v1/users/login", { email, password });
+			const response = await axios.post("/api/v1/users/login", {
+				email,
+				password,
+			});
 			const userData = response.data.user;
 			const token = response.data.token;
 			localStorage.setItem("token", token);
 			localStorage.setItem("user", JSON.stringify(userData));
 
-			setAuthorizationHeader(); // Set authorization header
-			setIsAuthenticated(true); // Update authenticated state
-			
-			
+			setAuthorizationHeader();
+			setIsAuthenticated(true);
+
 			if (userData.role_id === 1) {
 				navigate("/dashboard");
 			} else {
@@ -104,7 +105,7 @@ function SignIn({setIsAuthenticated}) {
 						<label>Remember me</label>
 					</div>
 
-					<button type='submit' >LOGIN</button>
+					<button type='submit'>LOGIN</button>
 
 					<div>
 						<p>

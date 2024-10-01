@@ -97,35 +97,52 @@ exports.login = async (req, res, next) => {
 
 // Middleware to protect resources
 exports.protect = async (req, res, next) => {
-	let token;
+    let token;
 
-	// 1) Get the token from the Authorization header
-	if (
-		req.headers.authorization &&
-		req.headers.authorization.startsWith("Bearer")
-	) {
-		token = req.headers.authorization.split(" ")[1];
-	}
+    // 1) Get the token from the Authorization header
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith("Bearer")
+    ) {
+        token = req.headers.authorization.split(" ")[1];
+    }
 
-	// 2) Ensure token exists
-	if (!token) {
-		return res.status(401).json({
-			status: "fail",
-			message: "You are not logged in! Please log in to get access",
-		});
-	}
+    // 2) Ensure token exists
+    if (!token) {
+        return res.status(401).json({
+            status: "fail",
+            message: "You are not logged in! Please log in to get access",
+        });
+    }
 
-	// 3) Verify token
-	const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+    // 3) Verify token
+    try {
+        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-	// 4) Check if user exists
-	const currentUser = await User.findById(decoded.id);
-	if (!currentUser) {
-		return res.status(401).json({
-			status: "fail",
-			message: "The user belonging to this token no longer exists",
-		});
-	}
+        // 4) Check if user still exists
+        const currentUser = await User.findById(decoded.id);
+        if (!currentUser) {
+            return res.status(401).json({
+                status: "fail",
+                message: "The user belonging to this token no longer exists",
+            });
+        }
+
+        // 5) Grant access to protected route
+        req.user = currentUser;
+        next();
+    } catch (err) {
+        if (err.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                status: 'fail',
+                message: 'Your token has expired. Please log in again.',
+            });
+        }
+        return res.status(401).json({
+            status: 'fail',
+            message: 'Invalid token or token verification failed',
+        });
+    }
 };
 
 exports.restrictTo = (...roles) => {

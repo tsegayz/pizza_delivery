@@ -1,12 +1,22 @@
 const mongoose = require("mongoose");
 
 const roleSchema = new mongoose.Schema({
-	_id: { type: Number, required: true },
 	name: {
 		type: String,
 		required: [true, "a role must have a name"],
 	},
-	description: String,
+	status: {
+		type: String,
+		default: "Active",
+	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
+	permission: {
+		type: [String],
+		default: [],
+	},
 });
 
 // THE MODEL

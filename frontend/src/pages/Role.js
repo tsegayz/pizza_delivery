@@ -2,31 +2,14 @@ import { useState } from "react";
 import { FaBell, FaDownload, FaEye, FaUserCircle } from "react-icons/fa";
 import Modal from "react-modal";
 import Sidebar from "../components/Sidebar";
-import Switch from "react-switch";
+import axios from "axios";
 
-const initialRoles = [
-	{
-		id: 1,
-		name: "kitchen manager",
-		createdAt: "2:44 PM 8/14/24",
-		actions: "inactive",
-	},
-	{
-		id: 2,
-		name: "cashier",
-		createdAt: "2:44 PM 8/14/24",
-		status: "inactive",
-	},
-	{
-		id: 3,
-		name: "Branch manager",
-		createdAt: "2:44 PM 8/14/24",
-		status: "inactive",
-	},
-];
+function Role({ data }) {
+	const [roles, setRoles] = useState(data);
+	const [name, setName] = useState("");
+	const [permission, setPermission] = useState([]);
 
-function Role({data}) {
-	const [roles, setRoles] = useState(initialRoles);
+	const [responseMessage, setResponseMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
 	const [selectedRoleId, setSelectedRoleId] = useState(null);
 	const [form, setForm] = useState({ name: "", price: "" });
@@ -53,12 +36,14 @@ function Role({data}) {
 	const handleCheckboxChange = (e) => {
 		setPermissions({ ...permissions, [e.target.name]: e.target.checked });
 	};
+
 	const toggleStatus = (index) => {
 		const newData = [...roles];
-		newData[index].active = !newData[index].active;
-		newData[index].status = newData[index].active ? "Active" : "Inactive";
+		newData[index].status =
+			newData[index].status === "Active" ? "Inactive" : "Active";
 		setRoles(newData);
 	};
+
 	const exportToCSV = () => {
 		const headers = "Role Name,Created At, Actions\n";
 		const rows = roles
@@ -79,6 +64,51 @@ function Role({data}) {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setResponseMessage("");
+
+		const selectedPermissions = Object.keys(permissions).filter(
+			(permission) => permissions[permission]
+		);
+
+		if (!name || !permission) {
+			setResponseMessage("Please fill in all the fields");
+			return;
+		}
+		const formData = new FormData();
+		formData.append("name", name);
+		formData.append("permission", JSON.stringify(selectedPermissions));
+
+		console.log(formData);
+
+		try {
+			const response = await axios.post(
+				"http://localhost:5000/api/v1/roles",
+				formData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			const userDataResponse = response.data.data; // Adjust as necessary
+			setResponseMessage(response.data.status);
+
+			setName("");
+			setPermissions("");
+
+			closeModal(); // Close modal after successful submission
+		} catch (error) {
+			if (error.response) {
+				setResponseMessage(error.response.data.message || "An error occurred");
+			} else {
+				setResponseMessage("An error occurred");
+			}
+		}
 	};
 
 	return (
@@ -129,20 +159,20 @@ function Role({data}) {
 						</thead>
 						<tbody>
 							{roles.map((role, index) => (
-								<tr key={index}>
+								<tr key={role._id}>
 									<td>{role.name}</td>
 									<td>{role.createdAt}</td>
 									<td>
 										<div
 											className={`status-container ${
-												role.active ? "active" : "inactive"
+												role.status === "Active" ? "active" : "inactive"
 											}`}
 										>
 											<div className='toggle'>
 												<label className='toggle-switch'>
 													<input
 														type='checkbox'
-														checked={role.active}
+														checked={role.status === "Active"}
 														onChange={() => toggleStatus(index)}
 													/>
 													<span className='slider'></span>
@@ -165,75 +195,79 @@ function Role({data}) {
 				className='modal'
 				overlayClassName='modal-overlay'
 			>
-				<div
-					className='modal-content'
-					style={{
-						width: "30em",
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-					}}
-				>
-					<h2 style={{ fontSize: "20px", color: "black" }}>Role</h2>
-					<div className='input-container' style={{ margin: "20px" }}>
-						<input
-							type='text'
-							name='name'
-							id='name'
-							value={form.name}
-							onChange={handleChange}
-							placeholder=' '
-							required
-						/>
-						<label htmlFor='name'>Name</label>
-					</div>
-					<h3
-						style={{
-							color: "grey",
-							margin: "0",
-							fontSize: "20px",
-							marginLeft: "-15em",
-						}}
-					>
-						Permissions
-					</h3>
+				<form onSubmit={handleSubmit}>
 					<div
+						className='modal-content'
 						style={{
+							width: "30em",
 							display: "flex",
-							flexWrap: "wrap",
-							alignItems: "flex-start",
+							flexDirection: "column",
+							alignItems: "center",
 						}}
 					>
-						{Object.keys(permissions).map((permission) => (
-							<label
-								key={permission}
-								style={{
-									width: "30%",
-									display: "flex",
-									alignItems: "center",
-									marginLeft: "50px",
-									marginTop: "10px",
+						<h2 style={{ fontSize: "20px", color: "black" }}>Role</h2>
+						<div className='input-container' style={{ margin: "20px" }}>
+							<input
+								type='text'
+								name='name'
+								id='name'
+								value={name}
+								onChange={(e) => {
+									setName(e.target.value);
 								}}
-							>
-								<input
-									type='checkbox'
-									name={permission}
-									checked={permissions[permission]}
-									onChange={handleCheckboxChange}
-								/>
-								{permission.charAt(0).toUpperCase() + permission.slice(1)}
-							</label>
-						))}
-					</div>
+								placeholder=' '
+								required
+							/>
+							<label htmlFor='name'>Name</label>
+						</div>
+						<h3
+							style={{
+								color: "grey",
+								margin: "0",
+								fontSize: "20px",
+								marginLeft: "-15em",
+							}}
+						>
+							Permissions
+						</h3>
+						<div
+							style={{
+								display: "flex",
+								flexWrap: "wrap",
+								alignItems: "flex-start",
+							}}
+						>
+							{Object.keys(permissions).map((permission) => (
+								<label
+									key={permission}
+									style={{
+										width: "30%",
+										display: "flex",
+										alignItems: "center",
+										marginLeft: "50px",
+										marginTop: "10px",
+									}}
+								>
+									<input
+										type='checkbox'
+										name={permission}
+										checked={permissions[permission]}
+										onChange={handleCheckboxChange}
+									/>
+									{permission.charAt(0).toUpperCase() + permission.slice(1)}
+								</label>
+							))}
+						</div>
 
-					<button
-						type='submit'
-						className='submit-btn'
-						style={{ margin: "20px", width: "10em", padding: "15px 30px" }}
-					>
-						Update
-					</button>
-				</div>
+						<button
+							type='submit'
+							className='submit-btn'
+							style={{ margin: "20px", width: "10em", padding: "15px 30px" }}
+						>
+							Update
+						</button>
+					</div>
+				</form>
 			</Modal>
 		</div>
 	);

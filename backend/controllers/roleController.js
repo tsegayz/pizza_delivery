@@ -53,7 +53,12 @@ exports.getRole = async (req, res) => {
 //// create new Role
 exports.createRole = async (req, res) => {
 	try {
-		const newRole = await Role.create(req.body);
+		const { name, permission } = req.body;
+
+		const newRole = await Role.create({
+			name,
+			permission,
+		});
 
 		res.status(201).json({
 			status: "sucess",

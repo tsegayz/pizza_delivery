@@ -40,8 +40,10 @@ function App() {
 			const response4 = await axios.get("/api/v1/users");
 			const { users } = response4.data.data;
 			setUser(users);
+
+			console.log("Orders Response:", response4);
 			
-			const response5 = await axios.get("/api/v1/role");
+			const response5 = await axios.get("/api/v1/roles");
 			const { roles } = response5.data.data;
 			setRole(roles);
 
@@ -90,7 +92,7 @@ function App() {
 								</>
 							}
 						/>
-						<Route path='/Dashboard' element={<Dashboard data={order} />} />
+						<Route path='/Dashboard' element={<Dashboard data={order} users={user} />} />
 					</Routes>
 				</div>
 			</Router>

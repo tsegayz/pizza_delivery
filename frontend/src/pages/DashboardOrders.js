@@ -4,71 +4,8 @@ import Modal from "react-modal";
 import Sidebar from "../components/Sidebar";
 import pizza3 from "../assets/pizza3.png";
 
-const ordersData = [
-	{
-		id: 1,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion"],
-		quantity: 4,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Preparing",
-	},
-	{
-		id: 2,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion"],
-		quantity: 3,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Ready",
-	},
-	{
-		id: 3,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion"],
-		quantity: 1,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Delivered",
-	},
-	{
-		id: 4,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion", "Olives"],
-		quantity: 6,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Preparing",
-	},
-	{
-		id: 5,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion"],
-		quantity: 2,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Delivered",
-	},
-	{
-		id: 6,
-		image: pizza3,
-		name: "Pizza",
-		topping: ["Mozzarella", "Tomato", "Onion"],
-		quantity: 1,
-		customerNo: "+251 1523654789",
-		createdAt: "2:44 PM 8/14/24",
-		status: "Delivered",
-	},
-];
-
-function Dashboard({data}) {
-	const [orders, setOrders] = useState(ordersData);
+function Dashboard({data, users}) {
+	const [orders, setOrders] = useState(data);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedOrderId, setSelectedOrderId] = useState(null);
 
@@ -87,9 +24,16 @@ function Dashboard({data}) {
 		updatedOrders[index].status = newStatus;
 		setOrders(updatedOrders);
 	};
+	const getUserPhoneNumber = (userId) => {
+		const user = users.find(user => user._id === userId);
+		return user ? user.phoneNumber : "Phone number not found";
+	  };
+	  
+	console.log(orders)
 
 	const getSelectedOrder = () => {
-		return orders.find((order) => order.id === selectedOrderId);
+		console.log(orders.find((order) => order._id === selectedOrderId));
+		return orders.find((order) => order._id === selectedOrderId);
 	};
 
 	const exportToCSV = () => {
@@ -154,7 +98,7 @@ function Dashboard({data}) {
 								<tr key={index}>
 									<td>
 										<img
-											src={order.image}
+											src={pizza3}
 											style={{ width: "1.4em", height: "auto" }}
 											alt={order.name}
 										/>
@@ -162,7 +106,7 @@ function Dashboard({data}) {
 									</td>
 									<td>
 										<button
-											onClick={() => showDetail(order.id)}
+											onClick={() => showDetail(order._id)}
 											style={{
 												color: "#ff9a34",
 												border: "none",
@@ -175,7 +119,7 @@ function Dashboard({data}) {
 										</button>
 									</td>
 									<td>{order.quantity}</td>
-									<td>{order.customerNo}</td>
+									<td>{getUserPhoneNumber(order.user_id)}</td>
 									<td>{order.createdAt}</td>
 									<td>
 										<select
@@ -234,7 +178,7 @@ function Dashboard({data}) {
 								}}
 							>
 								<li>Name: {getSelectedOrder().name}</li>
-								<li>Toppings: {getSelectedOrder().topping.join(", ")}</li>
+								<li>Toppings: {getSelectedOrder().toppings?.join(", ")}</li>
 								<li>Quantity: {getSelectedOrder().quantity}</li>
 							</ul>
 						) : (

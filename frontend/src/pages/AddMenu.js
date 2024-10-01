@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { FaUpload, FaPlus, FaBell, FaUserCircle } from "react-icons/fa";
 import Sidebar from "../components/Sidebar";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 function AddMenu({ setIsAuthenticated }) {
 	const [selectedImage, setSelectedImage] = useState(null);
@@ -15,7 +14,6 @@ function AddMenu({ setIsAuthenticated }) {
 		onions: false,
 		olives: false,
 	});
-	const navigate = useNavigate();
 	const [responseMessage, setResponseMessage] = useState("");
 	const [newIngredient, setNewIngredient] = useState("");
 
@@ -48,26 +46,23 @@ function AddMenu({ setIsAuthenticated }) {
 		e.preventDefault();
 		setResponseMessage("");
 	
-		// Convert selected ingredients to an array of strings
 		const selectedToppings = Object.keys(ingredients).filter(
 			(ingredient) => ingredients[ingredient]
 		);
 	
-		// Ensure all required fields are filled
 		if (!name || !price || !selectedImage) {
 			setResponseMessage("Please fill in all the fields");
 			return;
 		}
 	
-		// Create FormData object to handle image file
 		const formData = new FormData();
 		formData.append("name", name);
 		formData.append("price", price);
 		formData.append("toppings", JSON.stringify(selectedToppings));  // Convert array to string
 		formData.append("image", selectedImage); // Append the file directly
-		for (let pair of formData.entries()) {
-			console.log(pair[0], pair[1]);
-		}
+		// for (let pair of formData.entries()) {
+		// 	console.log(pair[0], pair[1]);
+		// }
 		try {
 			const response = await axios.post(
 				"http://localhost:5000/api/v1/menus",
@@ -96,10 +91,6 @@ function AddMenu({ setIsAuthenticated }) {
 			}
 		}
 	};
-	
-	
-	
-	
 
 	return (
 		<div className='add-menu'>

@@ -2,87 +2,25 @@ import { useState } from "react";
 import { FaBell, FaDownload, FaEye, FaUserCircle } from "react-icons/fa";
 import Modal from "react-modal";
 import Sidebar from "../components/Sidebar";
-import pizza3 from "../assets/pizza3.png";
+import axios from "axios";
 
-const userData = [
-	{
-		id: 1,
-		name: "blen",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-	{
-		id: 2,
-		name: "sara",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-	{
-		id: 3,
-		name: "amen",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-	{
-		id: 4,
-		name: "tim",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-	{
-		id: 5,
-		name: "john",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-	{
-		id: 6,
-		name: "mark",
-		phoneNo: "+251 1523654789",
-		email: "example@gmail.com",
-		status: "inactive",
-	},
-];
-
-function User({data}) {
-	const [users, setUsers] = useState(userData);
+function User({ data }) {
+	const [users, setUsers] = useState(data);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedUserId, setSelectedUserId] = useState(null);
-	const [form, setForm] = useState({ name: "", phoneNo: "", email: "" });
+
 	const showForm = () => {
 		setShowModal(true);
 	};
-	const handleChange = (e) => {
-		setForm({ ...form, [e.target.name]: e.target.value });
-	};
-	const showDetail = (userId) => {
-		setSelectedUserId(userId);
-		setShowModal(true);
-	};
-
 	const closeModal = () => {
 		setShowModal(false);
 		setSelectedUserId(null);
 	};
 
-	const updateStatus = (index, newStatus) => {
-		const updatedUsers = [...users];
-		updatedUsers[index].status = newStatus;
-		setUsers(updatedUsers);
-	};
-
-	const getSelectedOrder = () => {
-		return users.find((user) => user.id === selectedUserId);
-	};
 	const toggleStatus = (index) => {
 		const newData = [...users];
-		newData[index].active = !newData[index].active;
-		newData[index].status = newData[index].active ? "Active" : "Inactive";
+		newData[index].status =
+			newData[index].status === "Active" ? "Inactive" : "Active";
 		setUsers(newData);
 	};
 
@@ -105,6 +43,61 @@ function User({data}) {
 		document.body.removeChild(link);
 	};
 
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [role, setRole] = useState("");
+	const [responseMessage, setResponseMessage] = useState("");
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setResponseMessage("");
+	
+		// Log the inputs to see their values
+		console.log({ name, email, phoneNumber, role });
+	
+		if (!name || !email || !phoneNumber || !role) {
+			setResponseMessage("Please fill in all the fields");
+			return;
+		}
+	
+		// No need to use FormData unless you're uploading files
+		const userData = {
+			name,
+			email,
+			phoneNumber,
+			role,
+		};
+	
+		try {
+			const response = await axios.post(
+				"http://localhost:5000/api/v1/users",
+				userData,
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+	
+			// Handle successful response
+			const userDataResponse = response.data.data; // Adjust as necessary
+			setResponseMessage(response.data.status);
+			setUsers((prevUsers) => [...prevUsers, userDataResponse]); // Update the users state to reflect new user
+			setName(""); // Reset form fields
+			setEmail("");
+			setPhoneNumber("");
+			setRole("");
+			closeModal(); // Close modal after successful submission
+		} catch (error) {
+			if (error.response) {
+				setResponseMessage(error.response.data.message || "An error occurred");
+			} else {
+				setResponseMessage("An error occurred");
+			}
+		}
+	};
+	
 	return (
 		<div className='dashboard-container'>
 			<Sidebar />
@@ -152,35 +145,33 @@ function User({data}) {
 								<th>Status</th>
 							</tr>
 						</thead>
-						<tbody>
-							{users.map((user, index) => (
-								<tr key={index}>
-									<td>{user.name}</td>
-									<td>{user.phoneNo}</td>
-									<td>{user.email}</td>
-									<td>
-										<div
-											className={`status-container ${
-												user.active ? "active" : "inactive"
-											}`}
-										>
-											<div className='toggle'>
-												<label className='toggle-switch'>
-													<input
-														type='checkbox'
-														checked={user.active}
-														onChange={() => toggleStatus(index)}
-													/>
-													<span className='slider'></span>
-												</label>
-												<span className='status-text'>{user.status}</span>
-											</div>
-											<span className='icon'>🗑️</span>
+						{users.map((user, index) => (
+							<tr key={user._id}>
+								<td>{user.name}</td>
+								<td>{user.phoneNumber}</td>
+								<td>{user.email}</td>
+								<td>
+									<div
+										className={`status-container ${
+											user.status === "Active" ? "active" : "inactive"
+										}`}
+									>
+										<div className='toggle'>
+											<label className='toggle-switch'>
+												<input
+													type='checkbox'
+													checked={user.status === "Active"}
+													onChange={() => toggleStatus(index)}
+												/>
+												<span className='slider'></span>
+											</label>
+											<span className='status-text'>{user.status}</span>
 										</div>
-									</td>
-								</tr>
-							))}
-						</tbody>
+										<span className='icon'>🗑️</span>
+									</div>
+								</td>
+							</tr>
+						))}
 					</table>
 				</div>
 			</div>
@@ -190,75 +181,97 @@ function User({data}) {
 				className='modal'
 				overlayClassName='modal-overlay'
 			>
-				<div
-					className='modal-content'
-					style={{
-						width: "30em",
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-					}}
-				>
-					<h2 style={{ fontSize: "20px", color: "black" }}> New User</h2>
-					<div className='input-container' style={{ margin: "20px" }}>
-						<input
-							type='text'
-							name='name'
-							id='name'
-							value={form.name}
-							onChange={handleChange}
-							placeholder=' '
-							required
-						/>
-						<label htmlFor='name'>Name</label>
+				<form onSubmit={handleSubmit}>
+					<div
+						className='modal-content'
+						style={{
+							width: "30em",
+							display: "flex",
+							flexDirection: "column",
+							alignItems: "center",
+						}}
+					>
+						<h2 style={{ fontSize: "20px", color: "black" }}> New User</h2>
+						<div className='input-container' style={{ margin: "20px" }}>
+							<input
+								type='text'
+								name='name'
+								id='name'
+								value={name}
+								onChange={(e) => {
+									setName(e.target.value);
+								}}
+								placeholder=' '
+								required
+							/>
+							<label htmlFor='name'>Name</label>
+						</div>
+						<div className='input-container' style={{ margin: "20px" }}>
+							<input
+								type='email'
+								name='email'
+								id='name'
+								value={email}
+								onChange={(e) => {
+									setEmail(e.target.value);
+								}}
+								placeholder=' '
+								required
+							/>
+							<label htmlFor='name'>Email</label>
+						</div>
+						<div className='input-container' style={{ margin: "20px" }}>
+							<input
+								type='text'
+								name='phoneNumber' 
+								id='phoneNumber' 
+								value={phoneNumber}
+								onChange={(e) => {
+									setPhoneNumber(e.target.value);
+								}}
+								placeholder=' '
+								required
+							/>
+							<label htmlFor='name'>Phone Number</label>
+						</div>
+						<div>
+							<select
+								name='role'
+								value={role}
+								onChange={(e) => setRole(e.target.value)}
+								style={{
+									margin: "20px",
+									width: "13em",
+									padding: "15px 20px",
+									border: "#d6d6d6 solid 1px",
+									borderRadius: "5px",
+									backgroundColor: "white",
+								}}
+							>
+								{["User", "Admin", "manager"].map((option, index) => (
+									<option
+										key={index}
+										value={option}
+										style={{
+											border: "none",
+											backgroundColor: "white",
+											margin: "10px",
+										}}
+									>
+										{option}
+									</option>
+								))}
+							</select>
+							<button
+								type='submit'
+								className='submit-btn'
+								style={{ margin: "20px", width: "10em", padding: "15px 30px" }}
+							>
+								Add
+							</button>
+						</div>
 					</div>
-					<div className='input-container' style={{ margin: "20px" }}>
-						<input
-							type='email'
-							name='Email'
-							id='name'
-							value={form.name}
-							onChange={handleChange}
-							placeholder=' '
-							required
-						/>
-						<label htmlFor='name'>Email</label>
-					</div>
-					<div className='input-container' style={{ margin: "20px" }}>
-						<input
-							type='phone number'
-							name='Phone Number'
-							id='name'
-							value={form.name}
-							onChange={handleChange}
-							placeholder=' '
-							required
-						/>
-						<label htmlFor='name'>Phone Number</label>
-					</div>
-					<div>
-						<select
-							style={{ margin: "20px", width: "13em", padding: "15px 20px", border:'#d6d6d6 solid 1px', borderRadius:'5px', backgroundColor:'white' }}
-						>
-							{["customer", "admin", "manager"].map((option, index) => (
-								<option
-									key={index}
-									value={option}
-									style={{ border: "none", backgroundColor: "white", margin:'10px' }}
-								>
-									{option}
-								</option>
-							))}
-						</select>
-						<button
-							type='submit'
-							className='submit-btn'
-							style={{ margin: "20px", width: "10em", padding: "15px 30px" }}
-						>
-							Add
-						</button>
-					</div>
-				</div>
+				</form>
 			</Modal>
 		</div>
 	);
