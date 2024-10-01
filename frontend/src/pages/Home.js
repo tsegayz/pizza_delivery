@@ -66,7 +66,10 @@ function Home({ data, restaurants }) {
 							placeholder='Search '
 						/>
 						<button className='search-icon'>
-							<RiSearch2Line style={{ color: "white", fontSize: "37px" }} />
+							<RiSearch2Line
+								className='icon'
+								style={{ color: "white", fontSize: "37px" }}
+							/>
 						</button>
 					</div>
 					<div>
@@ -213,16 +216,24 @@ function Home({ data, restaurants }) {
 									src={pizza.image}
 									alt={pizza.name}
 									className='pizza-image'
-									style={{ margin: "30px 0" }}
+									style={{ margin: "0px 0" }}
 								/>
 								<div className='card-content'>
-									<h3 style={{ margin: "0", fontSize: "30px" }}>
+									<h3
+										style={{
+											margin: "0",
+											fontSize: "30px",
+											marginTop: "-0.1em",
+										}}
+									>
 										{pizza.name}
 									</h3>
-									<p style={{ margin: "0" }}>{pizza.description}</p>
+									<p style={{ margin: "0", fontSize: "16px", width: "100%" }}>
+										{pizza.ingredient}
+									</p>
 									<div className='price-order'>
 										<span className='price'>
-											<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+											<h2 style={{ color: "#27ae60", fontSize: "50px" }}>
 												{pizza.price}
 											</h2>
 											Birr
@@ -242,7 +253,7 @@ function Home({ data, restaurants }) {
 													alt={restaurant.name}
 													className='person-image'
 												/>
-												<span style={{ fontSize: "20px" }}>
+												<span style={{ fontSize: "16px" }}>
 													{restaurant.name}
 												</span>
 											</>
@@ -269,15 +280,15 @@ function Home({ data, restaurants }) {
 									className='pizza-image'
 								/>
 								<div className='card-content'>
-									<h3 style={{ margin: "0", fontSize: "30px" }}>
+									<h3 style={{ margin: "0", fontSize: "24px" }}>
 										{pizza.name}
 									</h3>
-									<p style={{ margin: "0", fontSize: "18px" }}>
+									<p style={{ margin: "0", fontSize: "16px", width: "100%" }}>
 										{pizza.ingredient}
 									</p>
 									<div className='price-order'>
 										<span className='price'>
-											<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+											<h2 style={{ color: "#27ae60", fontSize: "50px" }}>
 												{pizza.price}
 											</h2>
 											Birr
@@ -333,7 +344,7 @@ function Home({ data, restaurants }) {
 					</div>
 				</div>
 				<div class='footer-bottom'>
-					<div style={{ paddingLeft: "20px" }}>
+					<div style={{ paddingLeft: "20px" }} className='copyrgiht'>
 						<span>@2024 Pizza All Rights Reserved.</span>
 						<a href='#'>Terms & Conditions</a>
 					</div>
