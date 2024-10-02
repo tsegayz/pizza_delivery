@@ -42,7 +42,6 @@ function App() {
 			const { users } = response4.data.data;
 			setUser(users);
 
-			console.log("Orders Response:", response4);
 			
 			const response5 = await axios.get("/api/v1/roles");
 			const { roles } = response5.data.data;

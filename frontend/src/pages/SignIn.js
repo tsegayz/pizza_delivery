@@ -36,7 +36,7 @@ function SignIn({ setIsAuthenticated }) {
 			setIsAuthenticated(true);
 
 			if (userData.role_id === 1) {
-				navigate("/dashboard");
+				navigate("/addAdmin");
 			} else {
 				navigate("/order");
 			}
