@@ -578,8 +578,6 @@ footer {
 	background-color: #333;
 }
 
-
-
 /* order history page */
 .orderhistory .home-container-four {
 	display: flex;
@@ -777,7 +775,7 @@ footer {
 	margin-top: 8em;
 	width: 100%;
 }
-.personal-order .ordered-page .grid-container{
+.personal-order .ordered-page .grid-container {
 	width: 100%;
 	margin: 10px;
 }
@@ -1240,7 +1238,7 @@ input:checked + .slider:before {
 		width: 80%;
 	}
 	.home-container-four .pizza-image,
-	.home-container-five .pizza-image{
+	.home-container-five .pizza-image {
 		width: 11em;
 		height: auto;
 	}
@@ -1409,32 +1407,32 @@ input:checked + .slider:before {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		padding: 1em; 
+		padding: 1em;
 	}
 
 	.personal-order .container {
 		width: 100%;
 		display: flex;
-		flex-direction: column; 
+		flex-direction: column;
 		justify-content: center;
-		padding-top: 2em; 
+		padding-top: 2em;
 	}
 
 	.personal-order .pizza-image {
-		padding-right: 0; 
+		padding-right: 0;
 	}
-	.personal-order .pizza-image .pizza-option img{
-        width: 10em !important;
+	.personal-order .pizza-image .pizza-option img {
+		width: 10em !important;
 		height: 10em !important;
 		margin-left: 0;
 	}
-	.main-pizza img{
-        width: 15em !important;
+	.main-pizza img {
+		width: 15em !important;
 		margin-top: 30px;
-    }
+	}
 	.personal-order h1 {
-		font-size: 2em; 
-		text-align: start; 
+		font-size: 2em;
+		text-align: start;
 	}
 
 	.personal-order .ingredients {
@@ -1447,41 +1445,40 @@ input:checked + .slider:before {
 		margin-bottom: 15px;
 	}
 	.personal-order .order-section button {
-		font-size: 1.5em; 
-		padding: 5px 15px; 
+		font-size: 1.5em;
+		padding: 5px 15px;
 		border-radius: 10px;
 	}
 
 	.personal-order .order-section h2 {
-		font-size: 2em; 
+		font-size: 2em;
 		margin: 10px 0 0 0;
 	}
 	.personal-order .order-button {
 		width: 100%;
-		font-size: 2em; 
-		margin-top: 1em; 
+		font-size: 2em;
+		margin-top: 1em;
 	}
 
 	.personal-order .price {
-		font-size: 10px; 
-		margin-left: 0; 
-		margin-top: 10px; 
+		font-size: 10px;
+		margin-left: 0;
+		margin-top: 10px;
 		color: green;
 	}
 
 	.personal-order .ordered-page {
-		margin-top: 3em; 
+		margin-top: 3em;
 	}
 
 	.personal-order .ordered-page .grid-container .card {
-		width: 70%; 
+		width: 70%;
 		display: flex;
 		align-items: start;
 	}
 
 	.personal-order .ordered-page .grid-container .card img {
-		width: 50%; 
-		height: auto; 
+		width: 50%;
+		height: auto;
 	}
-
 }

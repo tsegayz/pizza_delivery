@@ -22,38 +22,53 @@ exports.getUser = (req, res) => {
 const Role = require("./../models/roleModel");
 
 exports.createUser = async (req, res) => {
-	try {
-		const { name, email, phoneNumber, role } = req.body;
+    try {
+        // Log the incoming request body to debug
+        console.log("Incoming Request Body: ", req.body);
 
-		// Fetch the role_id based on the provided role name (assuming this function exists)
-		const roleData = await Role.findOne({ name: role });
+        const { name, email, phoneNumber } = req.body;
 
-		if (!roleData) {
-			return res.status(400).json({
-				status: "fail",
-				message: "Role not found",
-			});
-		}
+        // Set default role to 'Admin' if not provided
+        const role = req.body.role || "Admin";
 
-		// Create a user without requiring a password
-		const newUser = await User.createAdminUser({
-			name,
-			email,
-			phoneNumber,
-			role_id: roleData._id, // Use the role_id from the fetched role data
-		});
+        // Log the role to make sure it's set correctly
+        console.log("Role: ", role);
 
-		res.status(201).json({
-			status: "success",
-			data: newUser,
-		});
-	} catch (err) {
-		res.status(400).json({
-			status: "fail",
-			message: err.message,
-		});
-	}
+        // Fetch the role from the database
+        const roleData = await Role.findOne({ name: role });
+
+        // If the role is not found, return an error
+        if (!roleData) {
+            console.log("Role not found");
+            return res.status(400).json({
+                status: "fail",
+                message: "Role not found",
+            });
+        }
+
+        console.log("Role Data: ", roleData);
+
+        const newUser = await User.createAdminUser({
+            name,
+            email,
+            phoneNumber,
+            role_id: roleData._id, // Use the role_id from the fetched role data
+        });
+
+        // Send back the created user
+        res.status(201).json({
+            status: "success",
+            data: newUser,
+        });
+    } catch (err) {
+        console.log("Error: ", err.message);
+        res.status(400).json({
+            status: "fail",
+            message: err.message,
+        });
+    }
 };
+
 
 exports.updateUser = (req, res) => {
 	res.status(500).json({

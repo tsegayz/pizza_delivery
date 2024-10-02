@@ -13,6 +13,7 @@ import AddMenu from "./pages/AddMenu";
 import Role from "./pages/Role";
 import User from "./pages/User";
 import axios from 'axios';
+import AddAdmin from './pages/AddAdmin';
 
 function App() {
 	const [pizza, setPizza] = useState([]);
@@ -83,6 +84,7 @@ function App() {
 						<Route path='/role' element={<Role data={role}/>} />
 						<Route path='/user' element={<User data={user} />} />
 						<Route path='/addMenu' element={<AddMenu />} />
+						<Route path='/addAdmin' element={<AddAdmin />} />
 						<Route
 							path='/orderHis'
 							element={

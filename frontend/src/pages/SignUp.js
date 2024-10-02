@@ -4,14 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function SignUp({ setIsAuthenticated }) {
-	const [form, setForm] = useState({
-		email: "",
-		password: "",
-		confirmPassword: "",
-		location: "",
-		phoneNumber: "",
-		termsAccepted: false,
-	});
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConfirm, setPasswordConfirm] = useState("");

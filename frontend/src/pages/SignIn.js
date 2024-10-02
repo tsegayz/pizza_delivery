@@ -10,7 +10,7 @@ function SignIn({ setIsAuthenticated }) {
 	const [remember, setRemember] = useState(false);
 	const [responseMessage, setResponseMessage] = useState("");
 	const [error, setError] = useState("");
-	const navigate = useNavigate(); // Use useNavigate for navigation
+	const navigate = useNavigate(); 
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
