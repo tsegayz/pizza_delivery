@@ -155,17 +155,17 @@ function Order() {
 							style={{ width: "30em", height: "auto" }}
 						/>
 					</div>
-					<div style={{ display: "flex", flexDirection: "column" }}>
+					<div className="pizza-option" style={{ display: "flex", flexDirection: "column" }}>
 						<img
 							src={pizza3}
 							alt='Margherita pizza'
-							style={{ width: "16em", height: "auto", cursor: "pointer" }}
+							style={{ width: "13em", height: "auto", cursor: "pointer" }}
 							onClick={() => selectPizza(pizza3)}
 						/>
 						<img
 							src={pizza4}
 							alt='Pepperoni pizza'
-							style={{ width: "16em", height: "auto", cursor: "pointer" }}
+							style={{ width: "13em", height: "auto", cursor: "pointer" }}
 							onClick={() => selectPizza(pizza4)}
 						/>
 					</div>

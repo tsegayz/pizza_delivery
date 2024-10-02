@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import pizza3 from "../assets/pizza3.png";
 import pizza4 from "../assets/pizza4.png";
 
-function OrderHistory({data}) {
+function OrderHistory() {
 	const popularPizza = [
 		{
 			name: "Margherita",
@@ -54,14 +54,14 @@ function OrderHistory({data}) {
 								<p style={{ margin: "0" }}>{pizza.description}</p>
 								<div className='price-order'>
 									<span className='price'>
-										<h2 style={{ color: "#27ae60", fontSize: "70px" }}>
+										<h2 style={{ color: "#27ae60", fontSize: "60px" }}>
 											{pizza.price}
 										</h2>
 										Birr
 									</span>
 									<h3
 										style={{
-											fontSize: "40px",
+											fontSize: "30px",
 											color: "green",
 											fontFamily: "sans-serif",
 										}}

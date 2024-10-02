@@ -88,7 +88,7 @@ function App() {
 							element={
 								<>
 									<NavBar />
-									<OrderHistory data={order} />
+									<OrderHistory />
 								</>
 							}
 						/>

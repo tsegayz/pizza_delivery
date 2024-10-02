@@ -578,285 +578,7 @@ footer {
 	background-color: #333;
 }
 
-/* /repsonsive////////////// */
-/* General Mobile Adjustments */
 
-@media (max-width: 480px) {
-	.logo img {
-		width: 30px;
-		height: 30px;
-	}
-	.navbar {
-		padding: 0;
-		margin: 0;
-		display: flex;
-		align-items: center;
-	}
-	.logo {
-		margin: 0;
-	}
-	.logo h1 {
-		font-size: 18px;
-		margin: 0;
-	}
-	.menu {
-		margin-left: -20px;
-		margin-top: 8px;
-	}
-	.menu li {
-		margin: 0;
-		font-size: 4px;
-	}
-	.menu li a {
-		font-size: 10px;
-		padding: 8px;
-	}
-	.register a {
-		font-size: 9px;
-		padding: 6px 10px;
-	}
-	.left-side {
-		margin-left: 0;
-		margin-left: 1em;
-		padding: 10px;
-		text-align: center;
-	}
-	.left-side h1 {
-		font-size: 40px;
-	}
-	.left-side p {
-		font-size: 10px;
-		width: 50%;
-		line-height: 14px;
-		margin: 0;
-		text-align: start;
-	}
-	.search-bar {
-		width: 90%;
-		margin: 20px auto;
-	}
-	.home-container-one .search-results {
-		width: 100%;
-		margin-top: -1em;
-	}
-	.right-side img {
-		height: 2em;
-		width: 100%;
-	}
-	.card {
-		flex-direction: column;
-		height: auto;
-		padding: 20px;
-		margin: 20px 0;
-	}
-	.card h1 {
-		font-size: 12px;
-	}
-	.card-image img {
-		width: 100%;
-		margin: 0;
-	}
-
-	.card-content {
-		text-align: center;
-	}
-
-	.home-container-three,
-	.home-container-four,
-	.home-container-five {
-		align-items: start;
-		padding-left: 10px;
-		margin: 0;
-	}
-	.home-container-two h1,
-	.home-container-three h1,
-	.home-container-four h1,
-	.home-container-five h1 {
-		font-size: 22px;
-		margin: 0;
-	}
-
-	.home-container-four .grid-container {
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
-		margin: 10px;
-	}
-	.home-container-five .grid-container {
-		width: 100%;
-		margin: 10px;
-		margin-bottom: 20px;
-	}
-	.home-container-five .grid-container .card {
-		width: 80%;
-	}
-	.home-container-four .pizza-image,
-	.home-container-five .pizza-image,
-	.ordered-page .pizza-image {
-		width: 11em;
-		height: auto;
-	}
-	.feedback {
-		padding: 0;
-		margin-top: 10px;
-		align-items: center;
-	}
-
-	.footer {
-		padding: 0;
-	}
-	.footer-nav {
-		display: flex;
-		flex-direction: column;
-	}
-	.footer-nav a {
-		margin: 5px;
-		font-size: 14px;
-	}
-
-	.social-icons a {
-		font-size: 18px;
-	}
-
-	.feedback-input {
-		width: 90%;
-		margin-top: -1em;
-		font-size: 12px;
-	}
-	.footer-bottom {
-		flex-direction: column;
-		padding: 20px;
-		font-size: 12px;
-	}
-	.footer-bottom .copyrgiht {
-		display: flex;
-		flex-direction: column;
-	}
-	.home-container-two {
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-		width: 100%;
-		padding: 10px;
-	}
-
-	.home-container-two h1 {
-		font-size: 1.5em;
-		margin-left: 0;
-	}
-
-	.home-container-two .card {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		color: white;
-		width: 75%;
-		height: auto;
-		border-radius: 15px;
-		margin: 10px auto;
-		margin-left: 10px;
-		padding: 2px;
-	}
-
-	.home-container-two .card-content {
-		padding: 10px 0 10px 10px;
-	}
-
-	.home-container-two .card-content h2 {
-		font-size: 12px;
-	}
-
-	.home-container-two .card-content p {
-		font-size: 10px;
-		width: 90%;
-		padding: 4px 0;
-	}
-
-	.home-container-two .order-button {
-		padding: 8px 25px;
-		font-size: 10px;
-	}
-
-	.home-container-two .card-image img {
-		width: 10em;
-		height: 13em;
-		margin-top: -5em;
-		margin-right: -5em;
-	}
-	.home-container-two .indicator {
-		width: 12px;
-		height: 12px;
-		margin: 0 10px;
-	}
-	.home-container-one {
-		flex-direction: row;
-		align-items: start;
-		overflow: hidden;
-	}
-
-	.left-side {
-		flex: 1;
-		padding: 15px;
-		margin: 0;
-		display: flex;
-		flex-direction: column;
-		align-items: start;
-	}
-
-	.left-side h1 {
-		font-size: 30px;
-		margin: 0;
-	}
-	.left-side p {
-		font-size: 12px;
-		width: 90%;
-		line-height: 14px;
-	}
-	.search-bar {
-		width: 80%;
-		margin-left: 0;
-		margin-top: 1.5em;
-	}
-	.input-field {
-		padding: 12px 15px;
-		font-size: 14px;
-	}
-
-	.search-icon {
-		padding: 2px;
-		margin-right: -2em;
-	}
-	.home-container-one .search-results {
-		margin-top: -1em;
-		padding: 0;
-	}
-
-	.home-container-one .search-item {
-		font-size: 16px;
-		padding: 5px 10px;
-	}
-	.right-side img {
-		width: 100%;
-		height: 16em;
-		margin-top: -1.5em;
-	}
-	.home-container-three .cards-two {
-		margin: 0;
-		width: 100%;
-	}
-	.home-container-three .cards-two .slide {
-		margin-left: 10px;
-	}
-	.orderhistory {
-		margin-top: -7em;
-	}
-	.orderhistory .home-container-four .grid-container .card {
-		width: 90%;
-	}
-	.orderhistory .home-container-four .grid-container p {
-		font-size: 12px;
-	}
-}
 
 /* order history page */
 .orderhistory .home-container-four {
@@ -1052,8 +774,19 @@ footer {
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: start;
-	margin-top: 10em;
+	margin-top: 8em;
 	width: 100%;
+}
+.personal-order .ordered-page .grid-container{
+	width: 100%;
+	margin: 10px;
+}
+.personal-order .ordered-page .grid-container .card {
+	width: 18%;
+}
+.personal-order .ordered-page .grid-container .card img {
+	width: 20em;
+	height: 15em;
 }
 .main-pizza {
 	overflow: hidden;
@@ -1392,4 +1125,363 @@ input:checked + .slider {
 
 input:checked + .slider:before {
 	transform: translateX(14px);
+}
+
+/* /repsonsive////////////// */
+/* General Mobile Adjustments */
+
+@media (max-width: 480px) {
+	.logo img {
+		width: 30px;
+		height: 30px;
+	}
+	.navbar {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		align-items: center;
+	}
+	.logo {
+		margin: 0;
+	}
+	.logo h1 {
+		font-size: 18px;
+		margin: 0;
+	}
+	.menu {
+		margin-left: -20px;
+		margin-top: 8px;
+	}
+	.menu li {
+		margin: 0;
+		font-size: 4px;
+	}
+	.menu li a {
+		font-size: 10px;
+		padding: 8px;
+	}
+	.register a {
+		font-size: 9px;
+		padding: 6px 10px;
+	}
+	.left-side {
+		margin-left: 0;
+		margin-left: 1em;
+		padding: 10px;
+		text-align: center;
+	}
+	.left-side h1 {
+		font-size: 40px;
+	}
+	.left-side p {
+		font-size: 10px;
+		width: 50%;
+		line-height: 14px;
+		margin: 0;
+		text-align: start;
+	}
+	.search-bar {
+		width: 90%;
+		margin: 20px auto;
+	}
+	.home-container-one .search-results {
+		width: 100%;
+		margin-top: -1em;
+	}
+	.right-side img {
+		height: 2em;
+		width: 100%;
+	}
+	.card {
+		flex-direction: column;
+		height: auto;
+		padding: 20px;
+		margin: 20px 0;
+	}
+	.card h1 {
+		font-size: 12px;
+	}
+	.card-image img {
+		width: 100%;
+		margin: 0;
+	}
+
+	.card-content {
+		text-align: center;
+	}
+
+	.home-container-three,
+	.home-container-four,
+	.home-container-five {
+		align-items: start;
+		padding-left: 10px;
+		margin: 0;
+	}
+	.home-container-two h1,
+	.home-container-three h1,
+	.home-container-four h1,
+	.home-container-five h1 {
+		font-size: 22px;
+		margin: 0;
+	}
+
+	.home-container-four .grid-container {
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		margin: 10px;
+	}
+	.home-container-five .grid-container {
+		width: 100%;
+		margin: 10px;
+		margin-bottom: 20px;
+	}
+	.home-container-five .grid-container .card {
+		width: 80%;
+	}
+	.home-container-four .pizza-image,
+	.home-container-five .pizza-image{
+		width: 11em;
+		height: auto;
+	}
+	.feedback {
+		padding: 0;
+		margin-top: 10px;
+		align-items: center;
+	}
+
+	.footer {
+		padding: 0;
+	}
+	.footer-nav {
+		display: flex;
+		flex-direction: column;
+	}
+	.footer-nav a {
+		margin: 5px;
+		font-size: 14px;
+	}
+
+	.social-icons a {
+		font-size: 18px;
+	}
+
+	.feedback-input {
+		width: 90%;
+		margin-top: -1em;
+		font-size: 12px;
+	}
+	.footer-bottom {
+		flex-direction: column;
+		padding: 20px;
+		font-size: 12px;
+	}
+	.footer-bottom .copyrgiht {
+		display: flex;
+		flex-direction: column;
+	}
+	.home-container-two {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		width: 100%;
+		padding: 10px;
+	}
+
+	.home-container-two h1 {
+		font-size: 1.5em;
+		margin-left: 0;
+	}
+
+	.home-container-two .card {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		color: white;
+		width: 75%;
+		height: auto;
+		border-radius: 15px;
+		margin: 10px auto;
+		margin-left: 10px;
+		padding: 2px;
+	}
+
+	.home-container-two .card-content {
+		padding: 10px 0 10px 10px;
+	}
+
+	.home-container-two .card-content h2 {
+		font-size: 12px;
+	}
+
+	.home-container-two .card-content p {
+		font-size: 10px;
+		width: 90%;
+		padding: 4px 0;
+	}
+
+	.home-container-two .order-button {
+		padding: 8px 25px;
+		font-size: 10px;
+	}
+
+	.home-container-two .card-image img {
+		width: 10em;
+		height: 13em;
+		margin-top: -5em;
+		margin-right: -5em;
+	}
+	.home-container-two .indicator {
+		width: 12px;
+		height: 12px;
+		margin: 0 10px;
+	}
+	.home-container-one {
+		flex-direction: row;
+		align-items: start;
+		overflow: hidden;
+	}
+
+	.left-side {
+		flex: 1;
+		padding: 15px;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+	}
+
+	.left-side h1 {
+		font-size: 30px;
+		margin: 0;
+	}
+	.left-side p {
+		font-size: 12px;
+		width: 90%;
+		line-height: 14px;
+	}
+	.search-bar {
+		width: 80%;
+		margin-left: 0;
+		margin-top: 1.5em;
+	}
+	.input-field {
+		padding: 12px 15px;
+		font-size: 14px;
+	}
+
+	.search-icon {
+		padding: 2px;
+		margin-right: -2em;
+	}
+	.home-container-one .search-results {
+		margin-top: -1em;
+		padding: 0;
+	}
+
+	.home-container-one .search-item {
+		font-size: 16px;
+		padding: 5px 10px;
+	}
+	.right-side img {
+		width: 100%;
+		height: 16em;
+		margin-top: -1.5em;
+	}
+	.home-container-three .cards-two {
+		margin: 0;
+		width: 100%;
+	}
+	.home-container-three .cards-two .slide {
+		margin-left: 10px;
+	}
+	.orderhistory {
+		margin-top: -7em;
+	}
+	.orderhistory .home-container-four .grid-container .card {
+		width: 90%;
+	}
+	.orderhistory .home-container-four .grid-container p {
+		font-size: 12px;
+	}
+	.personal-order {
+		background-color: #fff9ee;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 1em; 
+	}
+
+	.personal-order .container {
+		width: 100%;
+		display: flex;
+		flex-direction: column; 
+		justify-content: center;
+		padding-top: 2em; 
+	}
+
+	.personal-order .pizza-image {
+		padding-right: 0; 
+	}
+	.personal-order .pizza-image .pizza-option img{
+        width: 10em !important;
+		height: 10em !important;
+		margin-left: 0;
+	}
+	.main-pizza img{
+        width: 15em !important;
+		margin-top: 30px;
+    }
+	.personal-order h1 {
+		font-size: 2em; 
+		text-align: start; 
+	}
+
+	.personal-order .ingredients {
+		margin-bottom: 15px;
+		display: flex;
+	}
+	.personal-order .order-section {
+		display: flex;
+		justify-content: space-around;
+		margin-bottom: 15px;
+	}
+	.personal-order .order-section button {
+		font-size: 1.5em; 
+		padding: 5px 15px; 
+		border-radius: 10px;
+	}
+
+	.personal-order .order-section h2 {
+		font-size: 2em; 
+		margin: 10px 0 0 0;
+	}
+	.personal-order .order-button {
+		width: 100%;
+		font-size: 2em; 
+		margin-top: 1em; 
+	}
+
+	.personal-order .price {
+		font-size: 10px; 
+		margin-left: 0; 
+		margin-top: 10px; 
+		color: green;
+	}
+
+	.personal-order .ordered-page {
+		margin-top: 3em; 
+	}
+
+	.personal-order .ordered-page .grid-container .card {
+		width: 70%; 
+		display: flex;
+		align-items: start;
+	}
+
+	.personal-order .ordered-page .grid-container .card img {
+		width: 50%; 
+		height: auto; 
+	}
+
 }
