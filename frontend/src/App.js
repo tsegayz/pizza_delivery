@@ -15,7 +15,7 @@ import User from "./pages/User";
 import axios from 'axios';
 import AddAdmin from './pages/AddAdmin';
 
-const API_URL = "https://pizza-delivery-indol.vercel.app" ;
+const API_URL = "https://pizza-delivery-dggx.onrender.com/" ;
 
 function App() {
 	const [pizza, setPizza] = useState([]);
