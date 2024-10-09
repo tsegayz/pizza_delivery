@@ -12,10 +12,11 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 const corsOptions = {
-	origin: process.env.NODE_ENV === "development" 
-	  ? "http://localhost:3000" 
-	  : "https://pizza-delivery-deploy2.vercel.app"
-  };
+  origin: process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : ["https://pizza-delivery-indol.vercel.app", "http://localhost:3000"],
+};
+
   
 
 app.use(cors(corsOptions));

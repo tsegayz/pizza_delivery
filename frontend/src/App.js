@@ -15,7 +15,7 @@ import User from "./pages/User";
 import axios from 'axios';
 import AddAdmin from './pages/AddAdmin';
 
-const API_URL = process.env.REACT_APP_API_URL || "https://pizza-delivery-dggx.onrender.com";
+const API_URL = "https://pizza-delivery-indol.vercel.app" ;
 
 function App() {
 	const [pizza, setPizza] = useState([]);
@@ -47,6 +47,8 @@ function App() {
 			const response5 = await axios.get(`${API_URL}/api/v1/roles`);
 			const { roles } = response5.data.data;
 			setRole(roles);
+
+			console.log(response)
 
 		} catch (error) {
 			console.error("Error fetching data:", error);
