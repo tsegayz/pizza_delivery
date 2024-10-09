@@ -15,6 +15,8 @@ import User from "./pages/User";
 import axios from 'axios';
 import AddAdmin from './pages/AddAdmin';
 
+const API_URL = process.env.REACT_APP_API_URL || "https://pizza-delivery-dggx.onrender.com";
+
 function App() {
 	const [pizza, setPizza] = useState([]);
 	const [restaurant, setRestaurant] = useState([]);
@@ -26,24 +28,23 @@ function App() {
 	// Fetching data from the database
 	const fetchData = async () => {
 		try {
-			const response = await axios.get("/api/v1/pizzas");
+			const response = await axios.get(`${API_URL}/api/v1/pizzas`);
 			const { pizzas } = response.data.data;
 			setPizza(pizzas);
 
-			const response2 = await axios.get("/api/v1/restaurants");
+			const response2 = await axios.get(`${API_URL}/api/v1/restaurants`);
 			const { restaurants } = response2.data.data;
 			setRestaurant(restaurants);
 
-			const response3 = await axios.get("/api/v1/orders");
+			const response3 = await axios.get(`${API_URL}/api/v1/orders`);
 			const { orders } = response3.data.data;
 			setOrder(orders);
 
-			const response4 = await axios.get("/api/v1/users");
+			const response4 = await axios.get(`${API_URL}/api/v1/users`);
 			const { users } = response4.data.data;
 			setUser(users);
 
-			
-			const response5 = await axios.get("/api/v1/roles");
+			const response5 = await axios.get(`${API_URL}/api/v1/roles`);
 			const { roles } = response5.data.data;
 			setRole(roles);
 
