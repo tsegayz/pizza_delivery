@@ -12,8 +12,11 @@ if (process.env.NODE_ENV === "development") {
 
 app.use(express.json());
 const corsOptions = {
-	origin: "http://localhost:3000", // Replace with frontend origin
-};
+	origin: process.env.NODE_ENV === "development" 
+	  ? "http://localhost:3000" 
+	  : "https://pizza-delivery-deploy2.vercel.app"
+  };
+  
 
 app.use(cors(corsOptions));
 app.use("/images", express.static(path.join(__dirname, "images")));
