@@ -13,20 +13,23 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 const corsOptions = {
 	origin: function (origin, callback) {
-		// Allow requests from localhost during development
-		if (process.env.NODE_ENV === "development") {
-			callback(null, true);
-		}
-		// Allow requests from your deployed frontend
-		else if (origin === "https://pizza-delivery-indol.vercel.app") {
-			callback(null, true);
-		}
-		// Block requests from any other origin
-		else {
-			callback(new Error("Not allowed by CORS"));
-		}
+	  // Allow requests from localhost during development
+	  if (process.env.NODE_ENV === "development") {
+		callback(null, true);
+	  } 
+	  // Allow requests from the deployed frontend
+	  else if (origin === "https://pizza-delivery-indol.vercel.app" || origin === "http://localhost:3000") {
+		callback(null, true);
+	  } 
+	  // Block requests from any other origin
+	  else {
+		callback(new Error("Not allowed by CORS"));
+	  }
 	},
-};
+  };
+  
+  app.use(cors(corsOptions));
+  
 
 app.use(cors(corsOptions));
 
