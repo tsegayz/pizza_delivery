@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { setAuthorizationHeader } from './axiosConfig'; 
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { setAuthorizationHeader } from "./axiosConfig";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NavBar from "./pages/NavBar";
@@ -12,10 +12,10 @@ import Dashboard from "./pages/DashboardOrders";
 import AddMenu from "./pages/AddMenu";
 import Role from "./pages/Role";
 import User from "./pages/User";
-import axios from 'axios';
-import AddAdmin from './pages/AddAdmin';
+import axios from "axios";
+import AddAdmin from "./pages/AddAdmin";
 
-const API_URL = "https://pizza-delivery-dggx.onrender.com" ;
+const API_URL = "https://pizza-delivery-dggx.onrender.com";
 
 function App() {
 	const [pizza, setPizza] = useState([]);
@@ -48,20 +48,19 @@ function App() {
 			const { roles } = response5.data.data;
 			setRole(roles);
 
-			console.log(roles)
-
+			console.log(roles);
 		} catch (error) {
 			console.error("Error fetching data:", error);
 		}
 	};
 
 	useEffect(() => {
-		setAuthorizationHeader(); 
+		setAuthorizationHeader();
 
-		const token = localStorage.getItem('token');
+		const token = localStorage.getItem("token");
 		if (token) {
-			setIsAuthenticated(true); 
-			fetchData(); 
+			setIsAuthenticated(true);
+			fetchData();
 		}
 	}, []);
 
@@ -79,11 +78,14 @@ function App() {
 								</>
 							}
 						/>
-						<Route path='/signin' element={<SignIn setIsAuthenticated={setIsAuthenticated}/>} />
+						<Route
+							path='/signin'
+							element={<SignIn setIsAuthenticated={setIsAuthenticated} />}
+						/>
 						<Route path='/signup' element={<SignUp />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/order/:itemId' element={<Order />} />
-						<Route path='/role' element={<Role data={role}/>} />
+						<Route path='/role' element={<Role data={role} />} />
 						<Route path='/user' element={<User data={user} />} />
 						<Route path='/addMenu' element={<AddMenu />} />
 						<Route path='/addAdmin' element={<AddAdmin />} />
@@ -96,7 +98,10 @@ function App() {
 								</>
 							}
 						/>
-						<Route path='/Dashboard' element={<Dashboard data={order} users={user} />} />
+						<Route
+							path='/Dashboard'
+							element={<Dashboard data={order} users={user} />}
+						/>
 					</Routes>
 				</div>
 			</Router>
