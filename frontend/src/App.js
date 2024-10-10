@@ -48,7 +48,7 @@ function App() {
 			const { roles } = response5.data.data;
 			setRole(roles);
 
-			console.log(roles);
+			console.log(pizzas);
 		} catch (error) {
 			console.error("Error fetching data:", error);
 		}
