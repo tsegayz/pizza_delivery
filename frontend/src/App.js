@@ -15,7 +15,7 @@ import User from "./pages/User";
 import axios from "axios";
 import AddAdmin from "./pages/AddAdmin";
 
-const API_URL = "https://pizza-delivery-backend-deploy1.vercel.app";
+const API_URL = "https://pizza-delivery-backend-deploy.vercel.app";
 
 function App() {
 	const [pizza, setPizza] = useState([]);
