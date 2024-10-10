@@ -17,7 +17,7 @@ function SignUp({ setIsAuthenticated }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setResponseMessage(""); // Reset response message
-	
+
 		if (
 			!email ||
 			!password ||
@@ -29,16 +29,16 @@ function SignUp({ setIsAuthenticated }) {
 			setResponseMessage("Please fill in all the fields");
 			return;
 		}
-	
+
 		// Check if passwords match
 		if (password !== passwordConfirm) {
 			setResponseMessage("Password and confirm password do not match!");
 			return;
 		}
-	
+
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/users/signup",
+				"https://pizza-delivery-backend-deploy.vercel.app/api/v1/users/signup",
 				{
 					email,
 					password,
@@ -48,14 +48,14 @@ function SignUp({ setIsAuthenticated }) {
 					termsAccepted,
 				}
 			);
-	
+
 			const userData = response.data.data.user;
 			const token = response.data.token; // Extract the JWT token from the response
 			localStorage.setItem("token", token); // Store the token in local storage
 			localStorage.setItem("user", JSON.stringify(userData));
-	
+
 			setResponseMessage(response.data.status);
-	
+
 			// After successful signup, navigate to the order page based on selected item
 			const selectedItem = JSON.parse(localStorage.getItem("selectedItem"));
 			if (selectedItem) {
@@ -63,7 +63,7 @@ function SignUp({ setIsAuthenticated }) {
 			} else {
 				navigate("/"); // Fallback navigation if no selected item
 			}
-	
+
 			setIsAuthenticated(true);
 		} catch (error) {
 			if (error.response) {
@@ -74,7 +74,6 @@ function SignUp({ setIsAuthenticated }) {
 			}
 		}
 	};
-	
 
 	return (
 		<div className='sign'>

@@ -11,6 +11,8 @@ function SignIn({ setIsAuthenticated }) {
 	const [responseMessage, setResponseMessage] = useState("");
 	const [error, setError] = useState("");
 	const navigate = useNavigate(); 
+	
+	const API_URL = "https://pizza-delivery-backend-deploy.vercel.app";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -23,7 +25,7 @@ function SignIn({ setIsAuthenticated }) {
 		}
 
 		try {
-			const response = await axios.post("/api/v1/users/login", {
+			const response = await axios.post(`${API_URL}/api/v1/users/login`, {
 				email,
 				password,
 			});
