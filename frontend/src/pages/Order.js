@@ -45,7 +45,7 @@ function Order() {
 	const [quantity, setQuantity] = useState(1);
 	const [showModal, setShowModal] = useState(false);
 	const [pizzaName, setPizzaName] = useState("");
-	const [toppings, setToppings] = useState([]);
+	const [name, setName] = useState([]);
 	const [price, setPrice] = useState(150); // Base price for a pizza
 
 	const [ingredients, setIngredients] = useState({
@@ -90,8 +90,9 @@ function Order() {
 			};
 
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/orders",
+				"https://pizza-delivery-backend-deploy.vercel.app/api/v1/orders",
 				{
+					name: name,
 					user_id: user_id,
 					pizzaName: pizzaName || "Margherita",
 					toppings: selectedToppings,
@@ -132,6 +133,7 @@ function Order() {
 			if (item) {
 				setSelectedItem(item);
 				setMainPizza(item.image);
+				setName(item.name);
 			}
 		} else {
 			setMainPizza(selectedItem.image);
@@ -171,7 +173,7 @@ function Order() {
 					</div>
 				</div>
 				<div className='details-section'>
-					<h1>Margherita</h1>
+					<h1>{name}</h1>
 					<div className='ingredients'>
 						{Object.keys(ingredients).map((ingredient) => (
 							<label key={ingredient}>
