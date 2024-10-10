@@ -32,7 +32,7 @@ function AddAdmin() {
 
 		try {
 			const response = await axios.post(
-				"http://localhost:5000/api/v1/users",
+				"https://pizza-delivery-backend-deploy.vercel.app/api/v1/users",
 				userData,
 				{
 					headers: {
